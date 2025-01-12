@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --primary-color: #2563eb;
-  --secondary-color: #3b82f6;
-  --background-color: #ffffff;
+  --primary-color: #4f46e5;
+  --secondary-color: #6366f1;
+  --background-color: #f9fafb;
   --text-color: #1f2937;
-  --card-background: #f3f4f6;
+  --card-background: #ffffff;
   --border-color: #e5e7eb;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --hover-color: #dbeafe;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --hover-color: #e0e7ff;
 }
 
 .dark-theme {
@@ -18,7 +18,7 @@
   --text-color: #f3f4f6;
   --card-background: #1f2937;
   --border-color: #374151;
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.4);
   --hover-color: #2563eb;
 }
 
@@ -47,12 +47,12 @@ body {
 
 /* Global Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Utility Classes */
@@ -73,4 +73,47 @@ body {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 8px var(--shadow-color);
+}
+
+/* Botones mejorados */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.btn.primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+/* Estilos de barra de habilidades */
+.skill-bar {
+  background: var(--primary-color);
+  height: 10px;
+  border-radius: 5px;
+  transition: width 1.5s ease-in-out;
+}
+
+/* Efectos de sombra en navbar */
+.navbar {
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: box-shadow 0.3s;
+}
+
+.navbar:hover {
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
