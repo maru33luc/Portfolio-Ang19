@@ -1,1 +1,76 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #3b82f6;
+  --background-color: #ffffff;
+  --text-color: #1f2937;
+  --card-background: #f3f4f6;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-color: #dbeafe;
+}
+
+.dark-theme {
+  --primary-color: #3b82f6;
+  --secondary-color: #60a5fa;
+  --background-color: #111827;
+  --text-color: #f3f4f6;
+  --card-background: #1f2937;
+  --border-color: #374151;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --hover-color: #2563eb;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* Global Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background: var(--card-background);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px var(--shadow-color);
+}
