@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <footer class="footer">
       <div class="container footer-content">
-        <p>&copy; {{ currentYear }} Your Name. All rights reserved.</p>
+        <p>&copy; {{ currentYear }} Marina Lucero. All rights reserved.</p>
         <div class="social-links">
           <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-github"></i>

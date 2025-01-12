@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-projects',
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <section class="projects-section container fade-in">
       <h1>My Projects</h1>
-      
+
       <div class="projects-grid">
         <article class="project-card" *ngFor="let project of projects">
           <div class="project-image">
@@ -61,7 +61,7 @@ import { CommonModule } from '@angular/common';
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
+      // transform: translateY(-5px);
     }
 
     .project-image {
@@ -181,4 +181,9 @@ export class ProjectsComponent {
       githubUrl: 'https://github.com/yourusername/weather'
     }
   ];
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  
 }
