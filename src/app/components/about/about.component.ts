@@ -1,6 +1,32 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface ExperienceItem {
+  period: string;
+  role: string;
+  company: string;
+  description: string;
+  location: string;
+}
+
+interface EducationItem {
+  period: string;
+  degree: string;
+  institution: string;
+  description: string;
+  location: string;
+}
+
+type TimelineItem = {
+  period: string;
+  description: string;
+  location: string;
+  type: 'experience' | 'education';
+} & (
+  | { type: 'experience'; role: string; company: string }
+  | { type: 'education'; degree: string; institution: string }
+);
+
 @Component({
   selector: 'app-about',
   standalone: true,
@@ -14,20 +40,42 @@ import { CommonModule } from '@angular/common';
           <img src="assets/img/mari.png" alt="Profile picture" class="profile-image">
           <div class="bio">
             <h2>Full Stack Developer</h2>
-            <p>With a passion for creating beautiful and functional web applications, I specialize in modern web technologies and user-centric design.</p>
+            <p>Estudiante de Ingeniería en Sistemas de Información en la UTN FRMDP, con pasión por el desarrollo web y la tecnología. Me especializo en el desarrollo de aplicaciones web modernas y funcionales, con un enfoque en la experiencia del usuario.</p>
           </div>
         </div>
 
-        <div class="experience-section">
-          <h3>Experience</h3>
-          <div class="timeline">
-            <div class="timeline-item" *ngFor="let exp of experience">
-              <div class="timeline-date">{{exp.period}}</div>
-              <div class="timeline-content">
-                <h4>{{exp.role}}</h4>
-                <h5>{{exp.company}}</h5>
-                <p>{{exp.description}}</p>
-              </div>
+        <div class="journey-section">
+          <div class="timeline-filters">
+            <button [class.active]="showAll" (click)="filterItems('all')">All</button>
+            <button [class.active]="showExperience" (click)="filterItems('experience')">Experience</button>
+            <button [class.active]="showEducation" (click)="filterItems('education')">Education</button>
+          </div>
+
+          <div class="timeline-container">
+            <div class="timeline">
+              <ng-container *ngFor="let item of sortedItems">
+                <div class="timeline-item" [class.experience]="item.type === 'experience'" [class.education]="item.type === 'education'"
+                     [class.hidden]="(item.type === 'experience' && !showExperience) || (item.type === 'education' && !showEducation)">
+                  <div class="timeline-badge">
+                    <i [class]="item.type === 'experience' ? 'fas fa-briefcase' : 'fas fa-graduation-cap'"></i>
+                  </div>
+                  <div class="timeline-date">{{item.period}}</div>
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <span class="badge" [class.experience-badge]="item.type === 'experience'" 
+                                        [class.education-badge]="item.type === 'education'">
+                        {{item.type}}
+                      </span>
+                      <h4>{{item.type === 'experience' ? item.role : item.degree}}</h4>
+                      <h5>{{item.type === 'experience' ? item.company : item.institution}}</h5>
+                    </div>
+                    <p [innerHTML]="item.description"></p>
+                    <div class="location" *ngIf="item.location">
+                      <i class="fas fa-map-marker-alt"></i> {{item.location}}
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -46,7 +94,7 @@ import { CommonModule } from '@angular/common';
     }
 
     .about-content {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -83,61 +131,125 @@ import { CommonModule } from '@angular/common';
       line-height: 1.6;
     }
 
-    .experience-section {
-      padding: 2rem;
-      background: var(--card-background);
-      border-radius: 1rem;
-      box-shadow: 0 4px 6px var(--shadow-color);
+    .timeline-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .experience-section h3 {
-      color: var(--primary-color);
-      margin-bottom: 2rem;
+    .timeline-filters button {
+      padding: 0.5rem 1.5rem;
+      border: none;
+      border-radius: 2rem;
+      background: var(--card-background);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-filters button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .timeline-container {
+      position: relative;
+      padding: 2rem 0;
     }
 
     .timeline {
       position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: 0;
+      left: 50%;
       top: 0;
       height: 100%;
       width: 2px;
       background: var(--primary-color);
+      transform: translateX(-50%);
     }
 
     .timeline-item {
-      padding-left: 2rem;
       position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: 4rem;
+      width: calc(50% - 2rem);
+      opacity: 1;
+      transition: all 0.5s ease;
     }
 
-    .timeline-item::before {
-      content: '';
+    .timeline-item.hidden {
+      opacity: 0;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .timeline-item:nth-child(odd) {
+      margin-left: auto;
+      padding-left: 3rem;
+    }
+
+    .timeline-item:nth-child(even) {
+      margin-right: auto;
+      padding-right: 3rem;
+      text-align: right;
+    }
+
+    .timeline-badge {
       position: absolute;
-      left: 0;
-      top: 0;
-      width: 12px;
-      height: 12px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: var(--primary-color);
-      transform: translateX(-5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      top: 0;
     }
 
-    .timeline-date {
-      color: var(--primary-color);
-      font-weight: 500;
-      margin-bottom: 0.5rem;
+    .timeline-item:nth-child(odd) .timeline-badge {
+      left: -20px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-badge {
+      right: -20px;
     }
 
     .timeline-content {
-      background: var(--background-color);
+      background: var(--card-background);
       padding: 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 4px var(--shadow-color);
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px var(--shadow-color);
+    }
+
+    .timeline-header {
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-badge {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .education-badge {
+      background: #2196F3;
+      color: white;
     }
 
     .timeline-content h4 {
@@ -157,6 +269,17 @@ import { CommonModule } from '@angular/common';
       line-height: 1.6;
     }
 
+    .location {
+      margin-top: 1rem;
+      color: var(--text-color);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .location i {
+      margin-right: 0.5rem;
+    }
+
     @media (max-width: 768px) {
       .profile-section {
         flex-direction: column;
@@ -169,68 +292,33 @@ import { CommonModule } from '@angular/common';
         height: 150px;
       }
 
-      .timeline {
-        padding-left: 1rem;
-      }
-
       .timeline::before {
         left: 0;
       }
 
       .timeline-item {
-        padding-left: 2rem;
+        width: 100%;
+        padding-left: 2rem !important;
+        margin-left: 0 !important;
+        text-align: left !important;
       }
 
-      .timeline-item::before {
-        left: 0;
-        transform: translateX(-5px);
-        top: 8px;
+      .timeline-badge {
+        left: -20px !important;
       }
 
-      .timeline-date {
-        text-align: left;
-        font-size: 0.9rem;
-        margin-bottom: 0.75rem;
-      }
-
-      .timeline-content {
-        padding: 1rem;
-      }
-
-      .timeline-content h4 {
-        font-size: 1.1rem;
-      }
-
-      .timeline-content h5 {
-        font-size: 1rem;
-      }
-
-      .timeline-content p {
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .profile-section {
-        padding: 1rem;
-      }
-
-      .timeline {
-        padding-left: 0.5rem;
-      }
-
-      .timeline-item {
-        padding-left: 1.5rem;
-      }
-
-      .timeline-content {
-        padding: 0.75rem;
+      .timeline-item:nth-child(even) {
+        padding-right: 0;
       }
     }
   `]
 })
 export class AboutComponent {
-  experience = [
+  showAll = true;
+  showExperience = true;
+  showEducation = true;
+
+  private experience: ExperienceItem[] = [
     {
       period: 'May 2024 - Present',
       role: 'Packaged App Development Associate SAP',
@@ -293,6 +381,59 @@ export class AboutComponent {
       `,
       location: 'Remoto'
     }
-  ]
-  
+  ];
+
+  private education: EducationItem[] = [
+    {
+      period: '2020 - Present',
+      degree: 'Computer Engineering',
+      institution: 'Universidad Tecnológica Nacional',
+      description: `
+        Currently pursuing a degree in Computer Engineering with focus on software development,
+        algorithms, and system design. Participating in various academic projects and maintaining
+        excellent academic standing.
+      `,
+      location: 'Mar del Plata, Buenos Aires, Argentina'
+    },
+    {
+      period: '2014 - 2019',
+      degree: 'Technical High School Diploma in Computer Programming',
+      institution: 'E.E.T. N°5',
+      description: `
+        Completed technical education with focus on programming fundamentals, database management,
+        and computer systems. Graduated with honors.
+      `,
+      location: 'Mar del Plata, Buenos Aires, Argentina'
+    }
+  ];
+
+  get sortedItems(): TimelineItem[] {
+    const experienceItems: TimelineItem[] = this.experience.map(exp => ({
+      ...exp,
+      type: 'experience'
+    }));
+
+    const educationItems: TimelineItem[] = this.education.map(edu => ({
+      ...edu,
+      type: 'education'
+    }));
+
+    return [...experienceItems, ...educationItems].sort((a, b) => {
+      const dateA = new Date(a.period.split(' - ')[0]);
+      const dateB = new Date(b.period.split(' - ')[0]);
+      return dateB.getTime() - dateA.getTime();
+    });
+  }
+
+  filterItems(type: 'all' | 'experience' | 'education'): void {
+    if (type === 'all') {
+      this.showAll = true;
+      this.showExperience = true;
+      this.showEducation = true;
+    } else {
+      this.showAll = false;
+      this.showExperience = type === 'experience';
+      this.showEducation = type === 'education';
+    }
+  }
 }
