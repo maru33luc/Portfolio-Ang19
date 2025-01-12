@@ -11,6 +11,7 @@ export class ThemeService {
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       // Check system preference
+      if(typeof window !== "undefined"){
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       this.setTheme(prefersDark);
 
@@ -18,6 +19,7 @@ export class ThemeService {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         this.setTheme(e.matches);
       });
+    }
     }
   }
 

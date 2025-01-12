@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import ScrollReveal from 'scrollreveal';
+import { isPlatformBrowser } from '@angular/common';
 
 interface ExperienceItem {
   period: string;
@@ -23,9 +25,9 @@ type TimelineItem = {
   location: string;
   type: 'experience' | 'education';
 } & (
-  | { type: 'experience'; role: string; company: string }
-  | { type: 'education'; degree: string; institution: string }
-);
+    | { type: 'experience'; role: string; company: string }
+    | { type: 'education'; degree: string; institution: string }
+  );
 
 @Component({
   selector: 'app-about',
@@ -34,7 +36,7 @@ type TimelineItem = {
   template: `
     <section class="about-section container fade-in">
       <h1>About Me</h1>
-      
+
       <div class="about-content">
         <div class="profile-section">
           <img src="assets/img/mari.png" alt="Profile picture" class="profile-image">
@@ -53,16 +55,20 @@ type TimelineItem = {
 
           <div class="timeline-container">
             <div class="timeline">
-              <ng-container *ngFor="let item of sortedItems">
-                <div class="timeline-item" [class.experience]="item.type === 'experience'" [class.education]="item.type === 'education'"
-                     [class.hidden]="(item.type === 'experience' && !showExperience) || (item.type === 'education' && !showEducation)">
+              <ng-container *ngFor="let item of itemsSignal()">
+                <h2>{{item.period}}</h2>
+                <div class="timeline-item"
+                     [class.experience]="item.type === 'experience'"
+                     [class.education]="item.type === 'education'"
+                     >
                   <div class="timeline-badge">
                     <i [class]="item.type === 'experience' ? 'fas fa-briefcase' : 'fas fa-graduation-cap'"></i>
                   </div>
-                  <div class="timeline-date">{{item.period}}</div>
+
                   <div class="timeline-content">
+                  <div class="timeline-date">{{item.period}}</div>
                     <div class="timeline-header">
-                      <span class="badge" [class.experience-badge]="item.type === 'experience'" 
+                      <span class="badge" [class.experience-badge]="item.type === 'experience'"
                                         [class.education-badge]="item.type === 'education'">
                         {{item.type}}
                       </span>
@@ -175,12 +181,17 @@ type TimelineItem = {
       transform: translateX(-50%);
     }
 
+    .timeline-header h4{
+      margin:0;
+    }
+
     .timeline-item {
       position: relative;
       margin-bottom: 4rem;
       width: calc(50% - 2rem);
-      opacity: 1;
+      opacity: 0;
       transition: all 0.5s ease;
+      transform: translateY(50px); /* Element starts from below */
     }
 
     .timeline-item.hidden {
@@ -204,8 +215,8 @@ type TimelineItem = {
 
     .timeline-badge {
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: var(--primary-color);
       display: flex;
@@ -216,16 +227,16 @@ type TimelineItem = {
     }
 
     .timeline-item:nth-child(odd) .timeline-badge {
-      left: -20px;
+      left: 5px;
     }
 
     .timeline-item:nth-child(even) .timeline-badge {
-      right: -20px;
+      right: 5px;
     }
 
     .timeline-content {
       background: var(--card-background);
-      padding: 1.5rem;
+      padding: 1rem;
       border-radius: 1rem;
       box-shadow: 0 4px 6px var(--shadow-color);
     }
@@ -239,7 +250,8 @@ type TimelineItem = {
       padding: 0.25rem 0.75rem;
       border-radius: 1rem;
       font-size: 0.8rem;
-      margin-bottom: 0.5rem;
+      margin: 0.5rem 0;
+
     }
 
     .experience-badge {
@@ -298,142 +310,198 @@ type TimelineItem = {
 
       .timeline-item {
         width: 100%;
-        padding-left: 2rem !important;
-        margin-left: 0 !important;
-        text-align: left !important;
+        padding-left: 0;
+        padding-right: 0;
       }
 
-      .timeline-badge {
-        left: -20px !important;
+      .timeline-item:nth-child(odd) {
+        text-align: left;
       }
 
       .timeline-item:nth-child(even) {
-        padding-right: 0;
+        text-align: right;
       }
     }
-  `]
+  `],
 })
 export class AboutComponent {
+  // showExperience = true;
+  // showEducation = true;
   showAll = true;
   showExperience = true;
   showEducation = true;
 
-  private experience: ExperienceItem[] = [
+
+  items: TimelineItem[] = [
     {
-      period: 'May 2024 - Present',
+      period: 'May. 2024 - Actualidad · 9 meses',
+      description: 'Configuración y optimización de flujos de trabajo dentro de SAP para clientes internos, con el objetivo de mejorar la eficiencia operativa y garantizar que los procesos financieros se alineen con los requisitos del negocio. Gestión de configuraciones, resolución de incidencias y apoyo a la mejora continua de los sistemas en el módulo FI (Finanzas), con un enfoque particular en las áreas de Record to Report (RTR) y Treasury and Risk Management (TRM).',
+      location: 'Mar del Plata, Provincia de Buenos Aires, Argentina · En remoto',
+      type: 'experience',
       role: 'Packaged App Development Associate SAP',
-      company: 'Accenture',
-      description: `
-        Configuración y optimización de flujos de trabajo dentro de SAP para clientes internos, con el objetivo de mejorar la eficiencia operativa y garantizar que los procesos financieros se alineen con los requisitos del negocio. Gestión de configuraciones, resolución de incidencias y apoyo a la mejora continua de los sistemas en el módulo FI (Finanzas), con un enfoque particular en las áreas de Record to Report (RTR) y Treasury and Risk Management (TRM).
-        Aptitudes: SAP FI · SAP RTR · Gestión de configuración de software · SAP FICO.
-      `,
-      location: 'Mar del Plata, Provincia de Buenos Aires, Argentina · Remoto'
+      company: 'Accenture'
     },
     {
-      period: 'Oct 2024 - Dec 2024',
-      role: 'Instructor - Desarrollo Frontend con Angular, JavaScript y Tecnologías Complementarias',
-      company: 'ATICMA',
-      description: `
-        Diseño y desarrollo del curso 'Desarrollo Frontend con Angular, JavaScript y Tecnologías Complementarias'. Capacitación a estudiantes en:
-        - Introducción a Angular y TypeScript.
-        - Creación de componentes, directivas, y servicios.
-        - Gestión de datos con observables y RxJS.
-        - Diseño y validación de formularios reactivos.
-        - Enrutamiento y modularización en Angular.
-        - Despliegue de aplicaciones en Vercel, uso de GitHub Actions, y publicación en GitHub Pages.
-        Guía en proyectos prácticos para fomentar buenas prácticas como modularización, componentes reutilizables, y automatización del despliegue.
-        Aptitudes: Angular · GitHub Actions · JavaScript · Desarrollo frontend.
-      `,
-      location: 'Mar del Plata, Provincia de Buenos Aires, Argentina · Remoto'
+      period: 'Oct. 2024 - Dic. 2024 · 3 meses',
+      description: 'Desarrollo del curso "Desarrollo Frontend con Angular, JavaScript y Tecnologías Complementarias", capacitando a estudiantes en el desarrollo de aplicaciones modernas utilizando Angular y tecnologías relacionadas. Diseño y ejecución de un plan de estudios que incluyó temas como creación de componentes, directivas, y servicios, gestión de datos con observables y RxJS, diseño y validación de formularios reactivos, y enrutamiento en Angular.',
+      location: 'Mar del Plata, Provincia de Buenos Aires, Argentina · En remoto',
+      type: 'experience',
+      role: 'Profesora - Desarrollo Frontend con Angular, JavaScript y Tecnologías Complementarias',
+      company: 'ATICMA'
     },
     {
-      period: 'Mar 2023 - May 2024',
-      role: 'Desarrollador de Aplicaciones Angular + Node.js',
-      company: 'Freelance',
-      description: `
-        Desarrollo de aplicaciones web modernas con Angular para el frontend y Node.js/Express en el backend. Enfoque en soluciones escalables y experiencia del usuario.
-        - Tecnologías: Angular, Sweet Alert, Ngx-Spinner, AOS, GSAP, Firebase Authentication, Firestore, IndexedDB, Mercado Pago.
-        - Optimización con SSR para SEO y rendimiento.
-        - Proyectos destacados: E-commerceTech, App-Notes-Challenge, MuniApp.
-        Aptitudes: Angular CLI · Express.js · Node.js · SQL · Firebase.
-      `,
-      location: 'Remoto'
+      period: 'Mar. 2023 - May. 2024 · 1 año 3 meses',
+      description: 'Experiencia en la creación de aplicaciones web modernas utilizando Angular para el frontend y Node.js junto con Express para el backend. Enfoque en soluciones escalables y eficientes, con énfasis en bases de datos, autenticación y mejoras en la experiencia del usuario.',
+      location: 'En remoto',
+      type: 'experience',
+      role: 'Desarrollador de aplicaciones con Angular + NodeJs',
+      company: 'Autónomo'
     },
     {
-      period: 'Mar 2023 - Jul 2023',
-      role: 'Desarrollador de Aplicaciones Python + Django',
-      company: 'Freelance',
-      description: `
-        Creación de aplicaciones web con Python y Django, integrando Bootstrap para mejorar la experiencia del usuario. Implementación de dependencias con virtualenv y herramientas como Pillow, pydantic, y sqlparse para una gestión eficiente de datos.
-        Proyectos destacados:
-        - Gestión de turnos e información de clínicas.
-        Aptitudes: Python · Django.
-      `,
-      location: 'Remoto'
+      period: 'Mar. 2023 - Jul. 2023 · 5 meses',
+      description: 'Desarrollo de aplicaciones web utilizando Python + Django. Uso de tecnologías como Bootstrap para mejorar la experiencia del usuario y herramientas como Pillow, pydantic y sqlparse para mejorar la eficiencia y seguridad del proyecto.',
+      location: 'En remoto',
+      type: 'experience',
+      role: 'Desarrollador de aplicaciones Python + Django',
+      company: 'Autónomo'
     },
     {
-      period: 'Oct 2022 - Jun 2023',
+      period: 'Oct. 2022 - Jun. 2023 · 9 meses',
+      description: 'Desarrollo de aplicaciones en Java y JavaFX, utilizando patrones de diseño como MVC para mejorar la mantenibilidad del código. Implementación de autenticación de usuarios, encriptación de contraseñas y optimización de la interfaz gráfica con JavaFX.',
+      location: 'En remoto',
+      type: 'experience',
       role: 'Desarrollador de Aplicaciones Java + JavaFX',
-      company: 'Freelance',
-      description: `
-        Desarrollo de aplicaciones en Java y JavaFX utilizando patrones de diseño como MVC para una arquitectura robusta. Implementación de autenticación segura con Bcrypt.
-        Aptitudes: Java · JavaFX · Diseño de patrones.
-      `,
-      location: 'Remoto'
-    }
-  ];
-
-  private education: EducationItem[] = [
-    {
-      period: '2020 - Present',
-      degree: 'Computer Engineering',
-      institution: 'Universidad Tecnológica Nacional',
-      description: `
-        Currently pursuing a degree in Computer Engineering with focus on software development,
-        algorithms, and system design. Participating in various academic projects and maintaining
-        excellent academic standing.
-      `,
-      location: 'Mar del Plata, Buenos Aires, Argentina'
+      company: 'Autónomo'
     },
     {
-      period: '2014 - 2019',
-      degree: 'Technical High School Diploma in Computer Programming',
-      institution: 'E.E.T. N°5',
-      description: `
-        Completed technical education with focus on programming fundamentals, database management,
-        and computer systems. Graduated with honors.
-      `,
-      location: 'Mar del Plata, Buenos Aires, Argentina'
+      period: 'Ene. 2023 - Abr. 2023 · 4 meses',
+      description: 'Ejecutiva de Cuentas del sector Claro Empresas. Venta y asesoramiento sobre servicios tecnológicos como almacenamiento en la nube, servidores virtuales, redes virtuales, tecnología de IoT y herramientas colaborativas y de gestión.',
+      location: 'Mar del Plata, Provincia de Buenos Aires, Argentina · Presencial',
+      type: 'experience',
+      role: 'Ejecutiva de cuentas',
+      company: 'Claro Argentina'
+    },
+    {
+      period: 'Feb. 2022 - Nov. 2023',
+      description: 'Graduated with a degree in Technological Programming, focusing on web development technologies such as Angular, JavaScript, NodeJS, Firebase, and Firestore. I also gained experience with database management (MySQL, Sequelize) and project management tools like Jira and Trello.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Tecnicatura Universitaria en Programación, Tecnología de la Información',
+      institution: 'Universidad Tecnológica Nacional',
+    },
+    {
+      period: 'Mar. 2023 - Jun. 2023',
+      description: 'Specialized in Django, working with Python and MySQL. This course deepened my skills in backend development and web frameworks.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Especialización en Django',
+      institution: 'Universidad Tecnológica Nacional',
+    },
+    {
+      period: 'Ago. 2023 - Dic. 2023',
+      description: 'Completed a Full Stack web development course with a focus on JavaScript, NodeJS, and backend technologies, including ExpressJS, Sequelize, and MySQL. Projects included building dynamic web applications with the full stack.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Full Stack - Desarrollo Web',
+      institution: 'Codo a Codo - Gobierno de la Ciudad de Buenos Aires',
+    },
+    {
+      period: 'Ene. 2023',
+      description: 'Completed an academic update on the use of digital ecosystems in educational settings, learning how to integrate technology in teaching.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Actualización Académica en Ecosistemas Digitales en la Escuela',
+      institution: 'Universidad FASTA',
+    },
+    {
+      period: 'Jul. 2015 - Dic. 2021',
+      description: 'Earned a degree in History with a focus on teaching and humanities studies, gaining strong pedagogical and seminar facilitation skills.',
+      location: 'Mar del Plata, Argentina',
+      type: 'education',
+      degree: 'Profesor en Historia',
+      institution: 'Universidad Nacional de Mar del Plata',
+    },
+    {
+      period: 'Jun. 2023 - Ago. 2023',
+      description: 'Specialized in Python for Data Science, gaining experience with libraries such as Pandas, Scikit-learn, Numpy, Matplotlib, and Seaborn for data analysis.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Python para Data Science',
+      institution: 'Alura',
+    },
+    {
+      period: 'Ene. 2024 - Feb. 2024',
+      description: 'Completed a Bootcamp in SAP FI-CO, focusing on the configuration and management of SAP financial modules for business processes.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Bootcamp SAP FI-CO',
+      institution: 'Accenture',
     }
+    // Add more items here
   ];
 
-  get sortedItems(): TimelineItem[] {
-    const experienceItems: TimelineItem[] = this.experience.map(exp => ({
-      ...exp,
-      type: 'experience'
-    }));
+  itemsExperience = this.items.filter((item) => item.type === 'experience');
+  itemsEducation = this.items.filter((item) => item.type === 'education');
+  itemsSignal = signal<TimelineItem[]>([]);
 
-    const educationItems: TimelineItem[] = this.education.map(edu => ({
-      ...edu,
-      type: 'education'
-    }));
 
-    return [...experienceItems, ...educationItems].sort((a, b) => {
-      const dateA = new Date(a.period.split(' - ')[0]);
-      const dateB = new Date(b.period.split(' - ')[0]);
-      return dateB.getTime() - dateA.getTime();
-    });
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private cdr: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    this.itemsSignal.set(this.items);
+    console.log(this.itemsSignal());
   }
 
-  filterItems(type: 'all' | 'experience' | 'education'): void {
-    if (type === 'all') {
-      this.showAll = true;
-      this.showExperience = true;
-      this.showEducation = true;
-    } else {
-      this.showAll = false;
-      this.showExperience = type === 'experience';
-      this.showEducation = type === 'education';
+  ngAfterViewInit() {
+
+    this.animationItems();
+  }
+
+  animationItems() {
+    if (isPlatformBrowser(this.platformId)) {
+      import('scrollreveal').then((ScrollReveal) => {
+        const sr = ScrollReveal.default;
+
+        // Aquí seleccionas los elementos de la línea de tiempo y aplicas la animación
+        sr().reveal('.timeline-item', {
+          duration: 1000,
+          origin: 'bottom',
+          distance: '50px',
+          delay: 200,
+          reset: false,
+          viewFactor: 0.2,
+          easing: 'ease-in-out',
+          opacity: 0,
+          scale: 0.8,
+        });
+      });
+    }
+
+  }
+
+  filterItems(type: 'all' | 'experience' | 'education') {
+    switch (type) {
+      case 'all':
+        this.showAll = true;
+        this.showExperience = true;
+        this.showEducation = true;
+        this.itemsSignal.set(this.items);
+        this.animationItems();
+        break;
+      case 'experience':
+        this.showAll = false;
+        this.showExperience = true;
+        this.showEducation = false;
+        this.itemsSignal.set(this.itemsExperience);
+        this.animationItems();
+        break;
+      case 'education':
+        this.showAll = false;
+        this.showExperience = false;
+        this.showEducation = true;
+        this.itemsSignal.set(this.itemsEducation);
+        this.animationItems();
+        break;
     }
   }
 }

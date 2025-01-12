@@ -61,7 +61,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
     }
 
     .project-card:hover {
-      // transform: translateY(-5px);
+      transform: translateY(-5px);
     }
 
     .project-image {
@@ -185,5 +185,5 @@ export class ProjectsComponent {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  
+
 }
