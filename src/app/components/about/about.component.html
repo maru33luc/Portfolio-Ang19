@@ -1,0 +1,53 @@
+<section class="about-section container fade-in">
+  <h1>About Me</h1>
+
+  <div class="about-content">
+    <div class="profile-section">
+      <img src="assets/img/mari.png" alt="Profile picture" class="profile-image">
+      <div class="bio">
+        <h2>Full Stack Developer</h2>
+        <p>Estudiante de Ingeniería en Sistemas de Información en la UTN FRMDP, con pasión por el desarrollo web y la tecnología. Me especializo en el desarrollo de aplicaciones web modernas y funcionales, con un enfoque en la experiencia del usuario.</p>
+      </div>
+    </div>
+
+    <div class="journey-section">
+      <div class="timeline-filters">
+        <button [class.active]="showAll()" (click)="filterItems('all')">All</button>
+        <button [class.active]="showExperience()" (click)="filterItems('experience')">Experience</button>
+        <button [class.active]="showEducation()" (click)="filterItems('education')">Education</button>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline">
+          <ng-container *ngFor="let item of itemsSignal()">
+
+            <div class="timeline-item"
+                 [class.experience]="item.type === 'experience'"
+                 [class.education]="item.type === 'education'"
+                 >
+              <div class="timeline-badge">
+                <i [class]="item.type === 'experience' ? 'fas fa-briefcase' : 'fas fa-graduation-cap'"></i>
+              </div>
+
+              <div class="timeline-content">
+              <div class="timeline-date">{{item.period}}</div>
+                <div class="timeline-header">
+                  <span class="badge" [class.experience-badge]="item.type === 'experience'"
+                                    [class.education-badge]="item.type === 'education'">
+                    {{item.type}}
+                  </span>
+                  <h4>{{item.type === 'experience' ? item.role : item.degree}}</h4>
+                  <h5>{{item.type === 'experience' ? item.company : item.institution}}</h5>
+                </div>
+                <p [innerHTML]="item.description"></p>
+                <div class="location" *ngIf="item.location">
+                  <i class="fas fa-map-marker-alt"></i> {{item.location}}
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -33,304 +33,15 @@ type TimelineItem = {
   selector: 'app-about',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <section class="about-section container fade-in">
-      <h1>About Me</h1>
-
-      <div class="about-content">
-        <div class="profile-section">
-          <img src="assets/img/mari.png" alt="Profile picture" class="profile-image">
-          <div class="bio">
-            <h2>Full Stack Developer</h2>
-            <p>Estudiante de Ingeniería en Sistemas de Información en la UTN FRMDP, con pasión por el desarrollo web y la tecnología. Me especializo en el desarrollo de aplicaciones web modernas y funcionales, con un enfoque en la experiencia del usuario.</p>
-          </div>
-        </div>
-
-        <div class="journey-section">
-          <div class="timeline-filters">
-            <button [class.active]="showAll" (click)="filterItems('all')">All</button>
-            <button [class.active]="showExperience" (click)="filterItems('experience')">Experience</button>
-            <button [class.active]="showEducation" (click)="filterItems('education')">Education</button>
-          </div>
-
-          <div class="timeline-container">
-            <div class="timeline">
-              <ng-container *ngFor="let item of itemsSignal()">
-                <h2>{{item.period}}</h2>
-                <div class="timeline-item"
-                     [class.experience]="item.type === 'experience'"
-                     [class.education]="item.type === 'education'"
-                     >
-                  <div class="timeline-badge">
-                    <i [class]="item.type === 'experience' ? 'fas fa-briefcase' : 'fas fa-graduation-cap'"></i>
-                  </div>
-
-                  <div class="timeline-content">
-                  <div class="timeline-date">{{item.period}}</div>
-                    <div class="timeline-header">
-                      <span class="badge" [class.experience-badge]="item.type === 'experience'"
-                                        [class.education-badge]="item.type === 'education'">
-                        {{item.type}}
-                      </span>
-                      <h4>{{item.type === 'experience' ? item.role : item.degree}}</h4>
-                      <h5>{{item.type === 'experience' ? item.company : item.institution}}</h5>
-                    </div>
-                    <p [innerHTML]="item.description"></p>
-                    <div class="location" *ngIf="item.location">
-                      <i class="fas fa-map-marker-alt"></i> {{item.location}}
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  `,
-  styles: [`
-    .about-section {
-      padding: 4rem 0;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--text-color);
-    }
-
-    .about-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .profile-section {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 4rem;
-      padding: 2rem;
-      background: var(--card-background);
-      border-radius: 1rem;
-      box-shadow: 0 4px 6px var(--shadow-color);
-    }
-
-    .profile-image {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--primary-color);
-    }
-
-    .bio {
-      flex: 1;
-    }
-
-    .bio h2 {
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-
-    .bio p {
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-
-    .timeline-filters {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .timeline-filters button {
-      padding: 0.5rem 1.5rem;
-      border: none;
-      border-radius: 2rem;
-      background: var(--card-background);
-      color: var(--text-color);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .timeline-filters button.active {
-      background: var(--primary-color);
-      color: white;
-    }
-
-    .timeline-container {
-      position: relative;
-      padding: 2rem 0;
-    }
-
-    .timeline {
-      position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      height: 100%;
-      width: 2px;
-      background: var(--primary-color);
-      transform: translateX(-50%);
-    }
-
-    .timeline-header h4{
-      margin:0;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 4rem;
-      width: calc(50% - 2rem);
-      opacity: 0;
-      transition: all 0.5s ease;
-      transform: translateY(50px); /* Element starts from below */
-    }
-
-    .timeline-item.hidden {
-      opacity: 0;
-      height: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .timeline-item:nth-child(odd) {
-      margin-left: auto;
-      padding-left: 3rem;
-    }
-
-    .timeline-item:nth-child(even) {
-      margin-right: auto;
-      padding-right: 3rem;
-      text-align: right;
-    }
-
-    .timeline-badge {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      top: 0;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-badge {
-      left: 5px;
-    }
-
-    .timeline-item:nth-child(even) .timeline-badge {
-      right: 5px;
-    }
-
-    .timeline-content {
-      background: var(--card-background);
-      padding: 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 6px var(--shadow-color);
-    }
-
-    .timeline-header {
-      margin-bottom: 1rem;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.8rem;
-      margin: 0.5rem 0;
-
-    }
-
-    .experience-badge {
-      background: #4CAF50;
-      color: white;
-    }
-
-    .education-badge {
-      background: #2196F3;
-      color: white;
-    }
-
-    .timeline-content h4 {
-      color: var(--text-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-content h5 {
-      color: var(--secondary-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-content p {
-      color: var(--text-color);
-      opacity: 0.8;
-      white-space: pre-line;
-      line-height: 1.6;
-    }
-
-    .location {
-      margin-top: 1rem;
-      color: var(--text-color);
-      opacity: 0.7;
-      font-size: 0.9rem;
-    }
-
-    .location i {
-      margin-right: 0.5rem;
-    }
-
-    @media (max-width: 768px) {
-      .profile-section {
-        flex-direction: column;
-        text-align: center;
-        padding: 1.5rem;
-      }
-
-      .profile-image {
-        width: 150px;
-        height: 150px;
-      }
-
-      .timeline::before {
-        left: 0;
-      }
-
-      .timeline-item {
-        width: 100%;
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      .timeline-item:nth-child(odd) {
-        text-align: left;
-      }
-
-      .timeline-item:nth-child(even) {
-        text-align: right;
-      }
-    }
-  `],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
 })
 export class AboutComponent {
   // showExperience = true;
   // showEducation = true;
-  showAll = true;
-  showExperience = true;
-  showEducation = true;
-
+  showAll = signal<boolean>(true);
+  showExperience = signal<boolean>(false);
+  showEducation = signal<boolean>(false);
 
   items: TimelineItem[] = [
     {
@@ -482,23 +193,23 @@ export class AboutComponent {
   filterItems(type: 'all' | 'experience' | 'education') {
     switch (type) {
       case 'all':
-        this.showAll = true;
-        this.showExperience = true;
-        this.showEducation = true;
+        this.showAll.set(true);
+        this.showExperience.set(false);
+        this.showEducation.set(false);
         this.itemsSignal.set(this.items);
         this.animationItems();
         break;
       case 'experience':
-        this.showAll = false;
-        this.showExperience = true;
-        this.showEducation = false;
+        this.showAll.set(false);
+        this.showExperience.set(true);
+        this.showEducation.set(false);
         this.itemsSignal.set(this.itemsExperience);
         this.animationItems();
         break;
       case 'education':
-        this.showAll = false;
-        this.showExperience = false;
-        this.showEducation = true;
+        this.showAll.set(false);
+        this.showExperience.set(false);
+        this.showEducation.set(true);
         this.itemsSignal.set(this.itemsEducation);
         this.animationItems();
         break;
