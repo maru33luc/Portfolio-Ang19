@@ -61,12 +61,44 @@ export class AboutComponent {
       company: 'ATICMA'
     },
     {
+      period: 'Feb. 2022 - Nov. 2023',
+      description: 'Graduated with a degree in Technological Programming, focusing on web development technologies such as Angular, JavaScript, NodeJS, Firebase, and Firestore. I also gained experience with database management (MySQL, Sequelize) and project management tools like Jira and Trello.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Tecnicatura Universitaria en Programación, Tecnología de la Información',
+      institution: 'Universidad Tecnológica Nacional',
+    },
+    {
+      period: 'Ago. 2023 - Dic. 2023',
+      description: 'Completed a Full Stack web development course with a focus on JavaScript, NodeJS, and backend technologies, including ExpressJS, Sequelize, and MySQL. Projects included building dynamic web applications with the full stack.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Full Stack - Desarrollo Web',
+      institution: 'Codo a Codo - Gobierno de la Ciudad de Buenos Aires',
+    },
+    {
+      period: 'Ene. 2024 - Feb. 2024',
+      description: 'Completed a Bootcamp in SAP FI-CO, focusing on the configuration and management of SAP financial modules for business processes.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Bootcamp SAP FI-CO',
+      institution: 'Accenture',
+    },
+    {
       period: 'Mar. 2023 - May. 2024 · 1 año 3 meses',
       description: 'Experiencia en la creación de aplicaciones web modernas utilizando Angular para el frontend y Node.js junto con Express para el backend. Enfoque en soluciones escalables y eficientes, con énfasis en bases de datos, autenticación y mejoras en la experiencia del usuario.',
       location: 'En remoto',
       type: 'experience',
       role: 'Desarrollador de aplicaciones con Angular + NodeJs',
       company: 'Autónomo'
+    },
+    {
+      period: 'Jun. 2023 - Ago. 2023',
+      description: 'Specialized in Python for Data Science, gaining experience with libraries such as Pandas, Scikit-learn, Numpy, Matplotlib, and Seaborn for data analysis.',
+      location: 'Argentina',
+      type: 'education',
+      degree: 'Python para Data Science',
+      institution: 'Alura',
     },
     {
       period: 'Mar. 2023 - Jul. 2023 · 5 meses',
@@ -93,28 +125,12 @@ export class AboutComponent {
       company: 'Claro Argentina'
     },
     {
-      period: 'Feb. 2022 - Nov. 2023',
-      description: 'Graduated with a degree in Technological Programming, focusing on web development technologies such as Angular, JavaScript, NodeJS, Firebase, and Firestore. I also gained experience with database management (MySQL, Sequelize) and project management tools like Jira and Trello.',
-      location: 'Argentina',
-      type: 'education',
-      degree: 'Tecnicatura Universitaria en Programación, Tecnología de la Información',
-      institution: 'Universidad Tecnológica Nacional',
-    },
-    {
       period: 'Mar. 2023 - Jun. 2023',
       description: 'Specialized in Django, working with Python and MySQL. This course deepened my skills in backend development and web frameworks.',
       location: 'Argentina',
       type: 'education',
       degree: 'Especialización en Django',
       institution: 'Universidad Tecnológica Nacional',
-    },
-    {
-      period: 'Ago. 2023 - Dic. 2023',
-      description: 'Completed a Full Stack web development course with a focus on JavaScript, NodeJS, and backend technologies, including ExpressJS, Sequelize, and MySQL. Projects included building dynamic web applications with the full stack.',
-      location: 'Argentina',
-      type: 'education',
-      degree: 'Full Stack - Desarrollo Web',
-      institution: 'Codo a Codo - Gobierno de la Ciudad de Buenos Aires',
     },
     {
       period: 'Ene. 2023',
@@ -131,25 +147,9 @@ export class AboutComponent {
       type: 'education',
       degree: 'Profesor en Historia',
       institution: 'Universidad Nacional de Mar del Plata',
-    },
-    {
-      period: 'Jun. 2023 - Ago. 2023',
-      description: 'Specialized in Python for Data Science, gaining experience with libraries such as Pandas, Scikit-learn, Numpy, Matplotlib, and Seaborn for data analysis.',
-      location: 'Argentina',
-      type: 'education',
-      degree: 'Python para Data Science',
-      institution: 'Alura',
-    },
-    {
-      period: 'Ene. 2024 - Feb. 2024',
-      description: 'Completed a Bootcamp in SAP FI-CO, focusing on the configuration and management of SAP financial modules for business processes.',
-      location: 'Argentina',
-      type: 'education',
-      degree: 'Bootcamp SAP FI-CO',
-      institution: 'Accenture',
     }
-    // Add more items here
   ];
+
 
   itemsExperience = this.items.filter((item) => item.type === 'experience');
   itemsEducation = this.items.filter((item) => item.type === 'education');
@@ -180,10 +180,12 @@ export class AboutComponent {
           distance: '50px',
           delay: 200,
           reset: false,
-          viewFactor: 0.2,
+          viewFactor: 0.6,
           easing: 'ease-in-out',
-          opacity: 0,
           scale: 0.8,
+          afterReveal: function (el) {
+            console.log(`Revealed: ${el}`);
+          },
         });
       });
     }
@@ -193,26 +195,26 @@ export class AboutComponent {
   filterItems(type: 'all' | 'experience' | 'education') {
     switch (type) {
       case 'all':
+        this.itemsSignal.set(this.items);
         this.showAll.set(true);
         this.showExperience.set(false);
         this.showEducation.set(false);
-        this.itemsSignal.set(this.items);
-        this.animationItems();
         break;
       case 'experience':
+        this.itemsSignal.set(this.items.filter((item) => item.type === 'experience'));
         this.showAll.set(false);
         this.showExperience.set(true);
         this.showEducation.set(false);
-        this.itemsSignal.set(this.itemsExperience);
-        this.animationItems();
+
         break;
       case 'education':
+        this.itemsSignal.set(this.items.filter((item) => item.type === 'education'));
         this.showAll.set(false);
         this.showExperience.set(false);
         this.showEducation.set(true);
-        this.itemsSignal.set(this.itemsEducation);
-        this.animationItems();
         break;
     }
+    this.animationItems();
   }
+
 }
