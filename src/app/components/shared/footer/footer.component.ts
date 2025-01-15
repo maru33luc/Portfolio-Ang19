@@ -8,57 +8,41 @@ import { CommonModule } from '@angular/common';
   template: `
     <footer class="footer">
       <div class="container footer-content">
-        <p>&copy; {{ currentYear }} Marina Lucero. All rights reserved.</p>
+        <div class="footer-branding">
+          <h3>Marina Lucero</h3>
+          <p>&copy; {{ currentYear }}. All rights reserved.</p>
+          <p class="footer-tagline">Transforming ideas into stunning web experiences.</p>
+        </div>
+        <nav class="footer-nav">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+          </ul>
+        </nav>
         <div class="social-links">
+          <h4>Follow Me</h4>
           <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i>
+            <i class="fa fa-github" id="github"></i>
           </a>
           <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-linkedin"></i>
+            <i class="fa fa-linkedin" id="linkedin"></i>
           </a>
           <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-twitter"></i>
+            <i class="fa fa-twitter" id="twitter"></i>
           </a>
+          <a href="https://instagram" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-instagram" id="instagram"></i>
+          </a>
+
         </div>
       </div>
     </footer>
   `,
-  styles: [`
-    .footer {
-      background-color: var(--card-background);
-      padding: 1.5rem 0;
-      margin-top: auto;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .social-links a {
-      color: var(--text-color);
-      font-size: 1.25rem;
-      transition: color 0.3s;
-    }
-
-    .social-links a:hover {
-      color: var(--primary-color);
-    }
-
-    @media (max-width: 768px) {
-      .footer-content {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-    }
-  `]
+  styleUrl: "./footer.component.css",
 })
 export class FooterComponent implements OnInit {
   currentYear: number = 0;

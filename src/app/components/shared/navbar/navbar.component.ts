@@ -11,13 +11,13 @@ import { ThemeService } from '../../../services/theme.service';
     <nav class="navbar">
       <div class="container nav-container">
         <a routerLink="/" class="logo">Portfolio</a>
-        
+
         <div class="nav-links">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
           <a routerLink="/about" routerLinkActive="active">About</a>
           <a routerLink="/projects" routerLinkActive="active">Projects</a>
           <a routerLink="/contact" routerLinkActive="active">Contact</a>
-          
+
           <button class="theme-toggle" (click)="themeService.toggleTheme()">
             <span class="material-icons">
               {{themeService.isDarkMode() ? 'light_mode' : 'dark_mode'}}
@@ -29,7 +29,8 @@ import { ThemeService } from '../../../services/theme.service';
   `,
   styles: [`
     .navbar {
-      background-color: var(--card-background);
+      // background-color: var(--card-background);
+      background-color: black;
       padding: 1rem 0;
       position: sticky;
       top: 0;

@@ -18,18 +18,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
       <app-footer />
     </div>
   `,
-  styles: [`
-    .app-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .main-content {
-      flex: 1;
-      padding: 2rem 0;
-    }
-  `]
+  styleUrl: "./app.component.css",
 })
 export class AppComponent {
   themeService = inject(ThemeService);
