@@ -29,8 +29,7 @@ import { ThemeService } from '../../../services/theme.service';
   `,
   styles: [`
     .navbar {
-      // background-color: var(--card-background);
-      background-color: black;
+      background-color: var(--navbar-background);
       padding: 1rem 0;
       position: sticky;
       top: 0;
@@ -72,7 +71,7 @@ import { ThemeService } from '../../../services/theme.service';
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--primary-color);
+      color: var(--hover-color);
     }
 
     .nav-links a::after {
@@ -82,7 +81,7 @@ import { ThemeService } from '../../../services/theme.service';
       height: 2px;
       bottom: -4px;
       left: 0;
-      background-color: var(--primary-color);
+      background-color: var(--hover-color);
       transition: width 0.3s;
     }
 
