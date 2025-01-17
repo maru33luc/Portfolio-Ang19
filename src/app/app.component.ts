@@ -10,8 +10,9 @@ import { FooterComponent } from './components/shared/footer/footer.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent],
   template: `
+  <app-navbar />
     <div class="app-container" [class.dark-theme]="themeService.isDarkMode()">
-      <app-navbar />
+
       <main class="main-content">
         <router-outlet />
       </main>

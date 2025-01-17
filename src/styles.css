@@ -27,8 +27,9 @@
   --border-color: #374151;
   --shadow-color: rgba(0, 0, 0, 0.4);
   --hover-color: #2563eb;
-  --hero-image: url('./assets/img/background.jpg');
-  --navbar-background: rgba(0, 0, 0, 0.4);
+  /* --hero-image: url('./assets/img/background.jpg'); */
+  --hero-image: url('./assets/img/537922.jpg');
+  --navbar-background: rgba(0, 0, 0, 0.7);
   --body-background: linear-gradient(to bottom, black 90%, var(--background-color) 10%);
 
   --btn-primary-bg: rgba(59, 130, 246, 0.2);

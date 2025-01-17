@@ -31,7 +31,7 @@ import { ThemeService } from '../../../services/theme.service';
     .navbar {
       background-color: var(--navbar-background);
       padding: 1rem 0;
-      position: sticky;
+      // position: sticky;
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 4px var(--shadow-color);
