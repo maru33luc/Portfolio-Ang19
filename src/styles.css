@@ -27,8 +27,7 @@
   --border-color: #374151;
   --shadow-color: rgba(0, 0, 0, 0.4);
   --hover-color: #2563eb;
-  /* --hero-image: url('./assets/img/background.jpg'); */
-  --hero-image: url('./assets/img/537922.jpg');
+  --hero-image: url('./assets/img/537922.jpg') ;
   --navbar-background: rgba(0, 0, 0, 0.7);
   --body-background: linear-gradient(to bottom, black 90%, var(--background-color) 10%);
 
@@ -39,6 +38,54 @@
   --btn-text-light: #ffffff;
   --btn-border: #666666;
   --btn-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* ----------------- FONTS ----------------- */
+
+
+/* <uniquifier>: Use a unique and descriptive class name
+<weight>: Use a value from 100 to 900 */
+
+.montserrat-uniquifier {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+.kalam-light {
+  font-family: "Kalam", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.kalam-regular {
+  font-family: "Kalam", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kalam-bold {
+  font-family: "Kalam", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+ /* <uniquifier>: Use a unique and descriptive class name
+ <weight>: Use a value from 300 to 900 */
+
+.merienda-uniquifier {
+  font-family: "Merienda", serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+* {
+   font-family: "Kalam", serif;
+  font-weight: 300;
+  font-style: normal;
+  scroll-behavior: smooth;
 }
 
 body {

@@ -5,12 +5,11 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class ThemeService {
-  private darkMode = signal<boolean>(true);  // Modo oscuro por defecto
+  private darkMode = signal<boolean>(true); 
   private platformId = inject(PLATFORM_ID);
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
-      // Aplica el tema oscuro al cargar en el cliente
       this.setTheme(true);
     }
   }

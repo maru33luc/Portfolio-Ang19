@@ -19,7 +19,7 @@ import { ThemeService } from '../../../services/theme.service';
           <a routerLink="/contact" routerLinkActive="active">Contact</a>
 
           <button class="theme-toggle" (click)="themeService.toggleTheme()">
-            <span class="material-icons">
+            <span>
               {{themeService.isDarkMode() ? 'light_mode' : 'dark_mode'}}
             </span>
           </button>
@@ -31,7 +31,6 @@ import { ThemeService } from '../../../services/theme.service';
     .navbar {
       background-color: var(--navbar-background);
       padding: 1rem 0;
-      // position: sticky;
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 4px var(--shadow-color);

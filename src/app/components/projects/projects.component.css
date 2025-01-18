@@ -79,135 +79,12 @@ h3 {
 .project-links {
   display: flex;
   gap: 1rem;
-}
-
-.btn {
-  flex: 1;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  text-align: center;
-  font-weight: 500;
-  transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px var(--shadow-color);
-}
-
-.btn.primary {
-  background: var(--primary-color);
-  color: white;
-}
-
-.btn.secondary {
-  background: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
-}
-
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
-
-
-.projects-section {
-  padding: 4rem 0;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 3rem;
-  color: var(--text-color);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.project-card {
-  background: var(--card-background);
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 6px var(--shadow-color);
-  transition: transform 0.3s;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-image {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
-
-.project-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.project-card:hover .project-image img {
-  transform: scale(1.05);
-}
-
-.project-content {
-  padding: 1.5rem;
-}
-
-h3 {
-  color: var(--text-color);
-  margin-bottom: 1rem;
-}
-
-.project-description {
-  color: var(--text-color);
-  opacity: 0.8;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.tech-tag {
-  background: var(--primary-color);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.875rem;
-}
-
-.project-links {
-  display: flex;
-  gap: 1rem;
-  justify-content: center; /* Centrado de los botones */
-  margin-top: 1rem; /* Espacio adicional arriba de los botones */
+  margin-top: 1rem;
+  flex-direction: column;
 }
 
 .btn {
-  /* padding: 0.75rem 1.5rem; */
   border-radius: 25px;
   font-size: 1rem;
   cursor: pointer;
@@ -216,7 +93,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* Espaciado entre el texto y el icono */
+  gap: 0.5rem;
 }
 
 .btn.primary {

@@ -2,6 +2,7 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID, signal, ChangeDetectorRe
 import { CommonModule } from '@angular/common';
 import ScrollReveal from 'scrollreveal';
 import { isPlatformBrowser } from '@angular/common';
+import { ElapsedTimePipe } from '../shared/pipes/elapsed-time.pipe';
 
 interface ExperienceItem {
   period: string;
@@ -32,13 +33,11 @@ type TimelineItem = {
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ElapsedTimePipe],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css',
 })
 export class AboutComponent {
-  // showExperience = true;
-  // showEducation = true;
   showAll = signal<boolean>(true);
   showExperience = signal<boolean>(false);
   showEducation = signal<boolean>(false);
@@ -173,7 +172,6 @@ export class AboutComponent {
       import('scrollreveal').then((ScrollReveal) => {
         const sr = ScrollReveal.default;
 
-        // Aquí seleccionas los elementos de la línea de tiempo y aplicas la animación
         sr().reveal('.timeline-item', {
           duration: 1000,
           origin: 'bottom',
