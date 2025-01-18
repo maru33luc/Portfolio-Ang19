@@ -39,22 +39,22 @@ export class HomeComponent {
     {
       name: 'Frontend Development',
       description: 'Angular, React, Vue.js, and modern CSS',
-      icon: 'fas fa-code',
+      icon: 'fa fa-code',
     },
     {
       name: 'Backend Development',
       description: 'Node.js, Python, and databases',
-      icon: 'fas fa-server',
+      icon: 'fa fa-server',
     },
     {
       name: 'UI/UX Design',
       description: 'Figma, Adobe XD, and user research',
-      icon: 'fas fa-paint-brush',
+      icon: 'fa fa-paint-brush',
     },
     {
       name: 'DevOps',
       description: 'Docker, CI/CD, and cloud platforms',
-      icon: 'fas fa-cloud',
+      icon: 'fa fa-cloud',
     },
   ];
 

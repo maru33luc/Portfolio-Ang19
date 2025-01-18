@@ -38,28 +38,36 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 export class ProjectsComponent {
   projects = [
     {
-      title: 'E-commerce Platform',
+      title: 'FunkoStore E-Commerce Platform',
       description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
-      image: 'assets/projects/ecommerce.jpg',
+      image: '../../../assets/img/projects/FunkoStore.png',
       technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: 'https://example.com/ecommerce',
-      githubUrl: 'https://github.com/yourusername/ecommerce'
+      liveUrl: 'https://funko-store-seven.vercel.app/home',
+      githubUrl: 'https://github.com/maru33luc/FunkoStore-Postgres-2025.git'
     },
     {
-      title: 'Task Management App',
+      title: 'AppNotes - Note Taking App',
       description: 'A collaborative task management application with real-time updates and team collaboration features.',
-      image: 'assets/projects/taskapp.jpg',
+      image: '../../../assets/img/projects/AppNotes.png',
       technologies: ['React', 'Firebase', 'Material-UI', 'Redux'],
-      liveUrl: 'https://example.com/taskapp',
-      githubUrl: 'https://github.com/yourusername/taskapp'
+      liveUrl: 'https://app-notes-challenge-cli.vercel.app/notes-list',
+      githubUrl: 'https://github.com/maru33luc/App-Notes-Challenge.git'
     },
     {
-      title: 'Weather Dashboard',
+      title: 'MuniApp - Municipal Services App',
       description: 'A weather dashboard that provides real-time weather information and forecasts using multiple APIs.',
-      image: 'assets/projects/weather.jpg',
+      image: '../../../assets/img/projects/MuniApp.png',
       technologies: ['Vue.js', 'OpenWeather API', 'Chart.js'],
-      liveUrl: 'https://example.com/weather',
-      githubUrl: 'https://github.com/yourusername/weather'
+      liveUrl: 'https://pruebapwapush.vercel.app/home',
+      githubUrl: 'https://github.com/maru33luc/Muni-App-Client.git'
+    },
+    {
+      title: 'TechStore - E-Commerce Platform',
+      description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
+      image: '../../../assets/img/projects/TechStore.png',
+      technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
+      liveUrl: 'https://angular-ecommerce-electronics.vercel.app/',
+      githubUrl: 'https://github.com/maru33luc/Angular-Ecommerce-electronics.git'
     }
   ];
   constructor(
