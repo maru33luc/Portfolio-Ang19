@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   template: `
     <section class="contact-section container fade-in">
       <h1>Get In Touch</h1>
-      
+
       <div class="contact-container">
         <div class="contact-info">
           <div class="info-card">
@@ -17,13 +17,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
             <h3>Email</h3>
             <p>your.email&#64;example.com</p>
           </div>
-          
+
           <div class="info-card">
             <i class="fas fa-map-marker-alt"></i>
             <h3>Location</h3>
             <p>City, Country</p>
           </div>
-          
+
           <div class="info-card">
             <i class="fas fa-phone"></i>
             <h3>Phone</h3>
@@ -34,19 +34,19 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
           <div class="form-group">
             <label for="name">Name</label>
-            <input 
-              type="text" 
-              id="name" 
-              formControlName="name" 
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
               [class.error]="isFieldInvalid('name')"
             >
           </div>
 
           <div class="form-group">
             <label for="email">Email</label>
-            <input 
-              type="email" 
-              id="email" 
+            <input
+              type="email"
+              id="email"
               formControlName="email"
               [class.error]="isFieldInvalid('email')"
             >
@@ -54,9 +54,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea 
-              id="message" 
-              formControlName="message" 
+            <textarea
+              id="message"
+              formControlName="message"
               rows="5"
               [class.error]="isFieldInvalid('message')"
             ></textarea>
@@ -78,13 +78,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
     .contact-section {
       padding: 4rem 0;
     }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--text-color);
-    }
-
     .contact-container {
       max-width: 1000px;
       margin: 0 auto;

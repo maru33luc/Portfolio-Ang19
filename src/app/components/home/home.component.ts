@@ -11,7 +11,7 @@ import ScrollReveal from 'scrollreveal';
     <section class="hero fade-in">
       <div class="container">
         <div class="hero-content glass-effect">
-          <h1>Welcome to My Portfolio</h1>
+          <h1>Welcome to my Portfolio</h1>
           <p class="subtitle">Full Stack Developer & UI/UX Enthusiast</p>
           <div class="cta-buttons">
             <a routerLink="/projects" class="btn primary">View Projects</a>

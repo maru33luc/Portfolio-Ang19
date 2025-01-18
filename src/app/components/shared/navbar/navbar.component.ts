@@ -34,6 +34,8 @@ import { ThemeService } from '../../../services/theme.service';
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 4px var(--shadow-color);
+      transition: background 0.3s ease;
+      z-index: 1000;
     }
 
     .nav-container {
@@ -115,4 +117,19 @@ import { ThemeService } from '../../../services/theme.service';
 })
 export class NavbarComponent {
   themeService = inject(ThemeService);
+
+  ngOnInit() {
+    if (typeof window !== 'undefined') {
+      const navbar = document.querySelector('.navbar') as HTMLElement;
+
+      if (navbar && !this.themeService.isDarkMode()) {
+        window.addEventListener('scroll', () => {
+          const scrollPosition = window.scrollY;
+          const maxScroll = 300;
+          const opacity = Math.min(scrollPosition / maxScroll, 1);
+          navbar.style.backgroundColor = `rgba(255, 255, 255, ${0.2 + 0.8 * opacity})`;
+        });
+      }
+    }
+  }
 }
