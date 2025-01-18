@@ -6,7 +6,9 @@
   --card-background: #ffffff;
   --border-color: #e4e7eb;
   --shadow-color: rgba(0, 0, 0, 0.08);
-  --hover-color: #ddc3a2;
+  /* --hover-color: #ddc3a2; */
+  --hover-color: #ddeee9;
+  --active-dark-color: #004c99; /* Nuevo color más oscuro */
   --hero-image: url("./assets/img/light-background.jpg");
   --body-background: linear-gradient(to bottom, #eaf4fc, #f9fafc);
   --btn-primary-bg: linear-gradient(90deg, #606384, #d1a987);
@@ -40,7 +42,8 @@
 .dark-theme {
   --primary-color: #3b82f6;
   --secondary-color: #60a5fa;
-  --background-color: #111827;
+  /* --background-color: #111827; */
+  --background-color: #f7ecec;
   --text-color: #f3f4f6;
   --card-background: #1f2937;
   --border-color: #374151;
@@ -87,6 +90,19 @@
     text-shadow: 0 0 20px #0072ff, 0 0 30px #0072ff, 0 0 40px #00e6ff,
       0 0 50px #00e6ff, 0 0 75px #00e6ff;
   }
+   /* 0% {
+    text-shadow: 0 0 20px #00e6ff, 0 0 30px #00e6ff, 0 0 40px #9ce3eb,
+      0 0 50px #9ce3eb, 0 0 75px #9ce3eb;
+  }
+  50% {
+    text-shadow: 0 0 30px #9ce3eb, 0 0 40px #9ce3eb, 0 0 60px #00e6ff,
+      0 0 80px #00e6ff, 0 0 100px #00e6ff;
+  }
+  100% {
+    text-shadow: 0 0 20px #00e6ff, 0 0 30px #00e6ff, 0 0 40px #9ce3eb,
+      0 0 50px #9ce3eb, 0 0 75px #9ce3eb;
+  } */
+
 }
 
 /* ----------------- FONTS ----------------- */

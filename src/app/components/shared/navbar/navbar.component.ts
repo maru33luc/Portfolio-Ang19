@@ -27,93 +27,7 @@ import { ThemeService } from '../../../services/theme.service';
       </div>
     </nav>
   `,
-  styles: [`
-    .navbar {
-      background-color: var(--navbar-background);
-      padding: 1rem 0;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px var(--shadow-color);
-      transition: background 0.3s ease;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--primary-color);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .logo:hover {
-      color: var(--secondary-color);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      position: relative;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--hover-color);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background-color: var(--hover-color);
-      transition: width 0.3s;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: none;
-      color: var(--text-color);
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background-color: var(--hover-color);
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        gap: 1rem;
-      }
-    }
-  `]
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   themeService = inject(ThemeService);
@@ -122,8 +36,13 @@ export class NavbarComponent {
     if (typeof window !== 'undefined') {
       const navbar = document.querySelector('.navbar') as HTMLElement;
 
-      if (navbar && !this.themeService.isDarkMode()) {
+      if (navbar) {
         window.addEventListener('scroll', () => {
+          // Si el tema oscuro está activado, no cambiar la opacidad
+          if (this.themeService.isDarkMode()) {
+            navbar.style.backgroundColor = 'var(--navbar-background)';
+            return;
+          }
           const scrollPosition = window.scrollY;
           const maxScroll = 300;
           const opacity = Math.min(scrollPosition / maxScroll, 1);
