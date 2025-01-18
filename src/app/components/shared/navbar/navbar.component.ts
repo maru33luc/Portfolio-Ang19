@@ -10,7 +10,9 @@ import { ThemeService } from '../../../services/theme.service';
   template: `
     <nav class="navbar">
       <div class="container nav-container">
-        <a routerLink="/" class="logo">Portfolio</a>
+        <a routerLink="/" class="logo">
+          <img src="../../../../assets/img/mari.png" alt="">
+        </a>
 
         <div class="nav-links">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>

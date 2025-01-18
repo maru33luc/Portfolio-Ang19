@@ -22,10 +22,10 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
             </div>
             <div class="project-links">
               <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="btn primary">
-                <i class="fas fa-external-link-alt"></i> Live Demo
+                <i class="fa fa-external-link"></i> Live Demo
               </a>
               <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="btn secondary">
-                <i class="fab fa-github"></i> Source Code
+                <i class="fa fa-github"></i> Source Code
               </a>
             </div>
           </div>
@@ -38,20 +38,20 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 export class ProjectsComponent {
   projects = [
     {
+      title: 'TechStore - E-Commerce Platform',
+      description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
+      image: '../../../assets/img/projects/TechStore.png',
+      technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
+      liveUrl: 'https://angular-ecommerce-electronics.vercel.app/',
+      githubUrl: 'https://github.com/maru33luc/Angular-Ecommerce-electronics.git'
+    },
+    {
       title: 'FunkoStore E-Commerce Platform',
       description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
       image: '../../../assets/img/projects/FunkoStore.png',
       technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
       liveUrl: 'https://funko-store-seven.vercel.app/home',
       githubUrl: 'https://github.com/maru33luc/FunkoStore-Postgres-2025.git'
-    },
-    {
-      title: 'AppNotes - Note Taking App',
-      description: 'A collaborative task management application with real-time updates and team collaboration features.',
-      image: '../../../assets/img/projects/AppNotes.png',
-      technologies: ['React', 'Firebase', 'Material-UI', 'Redux'],
-      liveUrl: 'https://app-notes-challenge-cli.vercel.app/notes-list',
-      githubUrl: 'https://github.com/maru33luc/App-Notes-Challenge.git'
     },
     {
       title: 'MuniApp - Municipal Services App',
@@ -62,13 +62,14 @@ export class ProjectsComponent {
       githubUrl: 'https://github.com/maru33luc/Muni-App-Client.git'
     },
     {
-      title: 'TechStore - E-Commerce Platform',
-      description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
-      image: '../../../assets/img/projects/TechStore.png',
-      technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: 'https://angular-ecommerce-electronics.vercel.app/',
-      githubUrl: 'https://github.com/maru33luc/Angular-Ecommerce-electronics.git'
+      title: 'AppNotes - Note Taking App',
+      description: 'A collaborative task management application with real-time updates and team collaboration features.',
+      image: '../../../assets/img/projects/AppNotes.png',
+      technologies: ['React', 'Firebase', 'Material-UI', 'Redux'],
+      liveUrl: 'https://app-notes-challenge-cli.vercel.app/notes-list',
+      githubUrl: 'https://github.com/maru33luc/App-Notes-Challenge.git'
     }
+
   ];
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object
