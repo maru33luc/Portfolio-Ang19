@@ -1,6 +1,5 @@
 .about-section {
-  padding: 5rem 0;
-
+  padding: 4rem 0;
 }
 
 .about-section::before {
@@ -14,8 +13,6 @@
   background-attachment: fixed;
   z-index: -1;
 }
-
-
 
 .about-content {
   max-width: 1200px;
@@ -148,6 +145,7 @@
 .timeline-content {
   background: var(--card-background);
   padding: 1rem;
+  margin: 1rem;
   border-radius: 1rem;
   box-shadow: 0 4px 6px var(--shadow-color);
 }
@@ -162,7 +160,6 @@
   border-radius: 1rem;
   font-size: 0.8rem;
   margin: 0.5rem 0;
-
 }
 
 .experience-badge {
@@ -211,11 +208,28 @@
     width: 150px;
     height: 150px;
   }
-
-  .timeline::before {
-    left: 0;
+  .timeline-item:nth-child(odd) {
+    margin-left: auto;
+    padding-left: 0;
+  }
+  
+  .timeline-item:nth-child(even) {
+    margin-right: auto;
+    padding-right: 0rem;
+    text-align: right;
   }
 
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+  }
+  
   .timeline-item {
     width: 100%;
     padding-left: 0;
@@ -228,5 +242,28 @@
 
   .timeline-item:nth-child(even) {
     text-align: right;
+  }
+
+  .timeline-badge {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    top: -7px;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-badge {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .timeline-item:nth-child(even) .timeline-badge {
+    right: 50%;
+    transform: translateX(50%);
   }
 }
