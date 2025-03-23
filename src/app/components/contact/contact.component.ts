@@ -76,7 +76,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   `,
   styles: [`
     .contact-section {
-      padding: 4rem 0;
+      padding: 5rem 0;
     }
     .contact-container {
       max-width: 1000px;

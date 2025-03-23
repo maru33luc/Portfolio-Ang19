@@ -7,7 +7,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   imports: [CommonModule],
   template: `
     <section class="projects-section container fade-in">
-      <h1>My Projects</h1>
+      <h1 class="section-title">My Projects</h1>
 
       <div class="projects-grid">
         <article class="project-card" *ngFor="let project of projects">
@@ -15,7 +15,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
             <img [src]="project.image" [alt]="project.title">
           </div>
           <div class="project-content">
-            <h3>{{project.title}}</h3>
+            <h3 class="project-title">{{project.title}}</h3>
             <p class="project-description">{{project.description}}</p>
             <div class="tech-stack">
               <span class="tech-tag" *ngFor="let tech of project.technologies">{{tech}}</span>
@@ -69,11 +69,7 @@ export class ProjectsComponent {
       liveUrl: 'https://app-notes-challenge-cli.vercel.app/notes-list',
       githubUrl: 'https://github.com/maru33luc/App-Notes-Challenge.git'
     }
-
   ];
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
-
-
+  
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 }
