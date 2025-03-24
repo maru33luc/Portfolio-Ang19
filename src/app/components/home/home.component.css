@@ -2,6 +2,7 @@
   padding: 4rem 0;
   color: white;
   text-align: center;
+  /* margin-bottom: 4rem; */
   height: 80vh;
   mask: linear-gradient(var(--primary-color) 80%, transparent 100%);
   display: flex;
@@ -12,6 +13,7 @@
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
+  padding: 2rem;
   text-align: center;
   color: white;
   z-index: 1;
@@ -29,9 +31,7 @@
 }
 
 .subtitle {
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  white-space: normal; 
-  overflow-wrap: break-word; 
+  font-size: 1.5rem;
   margin-bottom: 2rem;
   opacity: 0.9;
 }
@@ -142,7 +142,7 @@ h2 {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
-  padding: 1rem;
+  padding: 2rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -160,24 +160,18 @@ h2 {
   }
 
   .hero h1{
+    /* si es necesario que el tamaño de la letra se achique hasta 2rem */
     font-size: clamp(2.7rem, 5vw, 3.9rem);
+    
+    
+
   }
 
   .subtitle {
     font-size: clamp(1.2rem, 3vw, 2rem);
     text-wrap: wrap;
-    overflow-wrap: break-word;
-    padding: 10px;
-  }
+    /* si es necesario que tire el texto a la siguiente linea */
+    
 
-  .hero-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .cta-buttons{
-    width: 100%;
   }
 }
