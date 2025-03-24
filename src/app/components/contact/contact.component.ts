@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -18,21 +18,21 @@ import {
       <div class="contact-container">
         <div class="contact-info">
           <div class="info-card">
-            <i class="fas fa-envelope"></i>
+            <i class="fa fa-envelope"></i>
             <h3>Email</h3>
-            <p>your.email&#64;example.com</p>
+            <p>maru33luc&#64;gmail.com</p>
           </div>
 
           <div class="info-card">
             <i class="fa fa-map-marker"></i>
             <h3>Location</h3>
-            <p>City, Country</p>
+            <p>Mar del Plata, Argentina</p>
           </div>
 
           <div class="info-card">
-            <i class="fas fa-phone"></i>
+            <i class="fa fa-phone"></i>
             <h3>Phone</h3>
-            <p>+1 234 567 890</p>
+            <p>+54 2234546561</p>
           </div>
         </div>
 
@@ -251,12 +251,18 @@ export class ContactComponent {
   isSubmitting = false;
   submitStatus: 'success' | 'error' | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,@Inject(PLATFORM_ID) private platformId: any) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       message: ['', [Validators.required, Validators.minLength(10)]],
     });
+  }
+
+  ngOnInit(){
+    if (isPlatformBrowser(this.platformId)) {
+          window.scrollTo(0, 0);
+        }
   }
 
   isFieldInvalid(fieldName: string): boolean {

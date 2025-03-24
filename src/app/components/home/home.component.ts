@@ -68,22 +68,21 @@ export class HomeComponent {
       import('scrollreveal').then((ScrollReveal) => {
         const sr = ScrollReveal.default;
         sr().reveal('.skills', {
-          duration: 1000, // Duración de la animación en milisegundos.
-          origin: 'left', // Dirección desde donde aparece el elemento ('left', 'right', 'top', 'bottom').
-          distance: '50px', // Distancia que recorre el elemento durante la animación.
-          delay: 200, // Retardo antes de que comience la animación (en ms).
-          reset: false, // Si es `true`, la animación se reinicia al hacer scroll fuera y volver al elemento.
-          viewFactor: 0.2, // Proporción del elemento visible antes de activar la animación (0 a 1).
+          duration: 1000, 
+          origin: 'left', 
+          distance: '50px', 
+          delay: 200,
+          reset: false, 
+          viewFactor: 0.2, 
           viewOffset: {
-            // Agrega un desplazamiento al viewport.
             top: 0,
             right: 0,
             bottom: 0,
             left: 0,
           },
-          easing: 'ease-in-out', // Efecto de transición para la animación.
-          opacity: 0, // Controla la opacidad inicial del elemento.
-          scale: 0.8, // Escala inicial del elemento (0 a 1).
+          easing: 'ease-in-out', 
+          opacity: 0,
+          scale: 0.8,
         });
       });
     }

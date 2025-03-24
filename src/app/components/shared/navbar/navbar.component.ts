@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private scrollListener: (() => void) | undefined;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {

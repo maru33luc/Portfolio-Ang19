@@ -2,7 +2,6 @@
   padding: 4rem 0;
   color: white;
   text-align: center;
-  /* margin-bottom: 4rem; */
   height: 80vh;
   mask: linear-gradient(var(--primary-color) 80%, transparent 100%);
   display: flex;
@@ -146,8 +145,6 @@ h2 {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* responsive */
-
 @media (max-width: 768px) {
   .hero{
     margin-bottom: 0;
@@ -160,18 +157,11 @@ h2 {
   }
 
   .hero h1{
-    /* si es necesario que el tamaño de la letra se achique hasta 2rem */
     font-size: clamp(2.7rem, 5vw, 3.9rem);
-    
-    
-
   }
 
   .subtitle {
     font-size: clamp(1.2rem, 3vw, 2rem);
     text-wrap: wrap;
-    /* si es necesario que tire el texto a la siguiente linea */
-    
-
   }
 }

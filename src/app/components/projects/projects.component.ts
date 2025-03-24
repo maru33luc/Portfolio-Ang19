@@ -72,4 +72,10 @@ export class ProjectsComponent {
   ];
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit(){
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, 0);
+    }
+  }
 }

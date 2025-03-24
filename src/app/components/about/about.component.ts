@@ -160,6 +160,9 @@ export class AboutComponent {
   ngOnInit() {
     this.itemsSignal.set(this.items);
     console.log(this.itemsSignal());
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, 0);
+    }
   }
 
   ngAfterViewInit() {
