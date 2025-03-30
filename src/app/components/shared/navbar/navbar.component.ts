@@ -14,7 +14,7 @@ import { ThemeService } from '../../../services/theme.service';
           <img src="../../../../assets/img/mari.png" alt="Logo">
         </a>
         <button class="menu-toggle" (click)="toggleMenu()">
-          <span class="menu-icon">{{ isMenuOpen ? '&times;' : '&#9776;' }}</span>
+          <span class="menu-icon">{{ menuIconContent }}</span>
         </button>
         <div class="nav-links" [class.active]="isMenuOpen">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
@@ -33,6 +33,7 @@ import { ThemeService } from '../../../services/theme.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   themeService = inject(ThemeService);
   isMenuOpen = false;
+  menuIconContent = '☰';
   private scrollListener: (() => void) | undefined;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
@@ -41,20 +42,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {
       this.renderer.setStyle(document.body, 'overflow', 'hidden');
+      this.menuIconContent = '×';
     } else {
       this.renderer.removeStyle(document.body, 'overflow');
+      this.menuIconContent = '☰';
     }
     this.updateMenuColors();
     this.adjustMenuIconPosition();
+    this.updateMenuIconColor();
   }
 
   closeMenu() {
     if (this.isMenuOpen) {
       this.isMenuOpen = false;
       this.renderer.removeStyle(document.body, 'overflow');
+      this.menuIconContent = '☰';
     }
     this.updateMenuColors();
     this.adjustMenuIconPosition();
+    this.updateMenuIconColor();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -80,13 +86,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.updateMenuColors();
     this.setupScrollListener();
     this.adjustMenuIconPosition();
+    this.updateMenuIconColor();
   }
 
   private setupScrollListener() {
     const navbar = this.el.nativeElement.querySelector('.navbar');
     const navLinks = this.el.nativeElement.querySelectorAll('.nav-links a');
     const themeToggle = this.el.nativeElement.querySelector('.theme-toggle');
-    const menuIcon = this.el.nativeElement.querySelector('.menu-icon');
 
     this.scrollListener = () => {
       const scrollPosition = window.scrollY;
@@ -102,7 +108,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       const afterColor = scrollPosition > 50 ? 'after-color' : '';
 
       navLinks.forEach((link: HTMLElement) => {
-        this.renderer.setStyle(link, 'color', textColor);
+        if (!this.themeService.isDarkMode() && this.isMenuOpen) {
+          this.renderer.setStyle(link, 'color', 'white');
+        } else {
+          this.renderer.setStyle(link, 'color', textColor);
+        }
         if (afterColor) {
           this.renderer.addClass(link, afterColor);
         } else {
@@ -110,8 +120,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         }
       });
 
-      this.renderer.setStyle(menuIcon, 'color', textColor);
-      
+      this.updateMenuIconColor();
       if (themeToggle) {
         this.renderer.setStyle(themeToggle, 'color', textColor);
       }
@@ -123,13 +132,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private updateMenuColors() {
     const navLinks = this.el.nativeElement.querySelectorAll('.nav-links a');
     const themeToggle = this.el.nativeElement.querySelector('.theme-toggle');
-    const menuIcon = this.el.nativeElement.querySelector('.menu-icon');
 
     let textColor = this.themeService.isDarkMode() ? 'white' : 'var(--text-color)';
 
     if (!this.themeService.isDarkMode() && this.isMenuOpen) {
       textColor = 'white';
-      this.renderer.setStyle(menuIcon, 'color', 'white');
     }
 
     navLinks.forEach((link: HTMLElement) => {
@@ -145,12 +152,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const menuToggle = this.el.nativeElement.querySelector('.menu-toggle');
     if (menuToggle) {
       if (this.isMenuOpen) {
-        this.renderer.setStyle(menuToggle, 'margin-right', '10px'); 
+        this.renderer.setStyle(menuToggle, 'margin-right', '10px');
         this.renderer.setStyle(menuToggle, 'font-size', '2.8rem');
       } else {
         this.renderer.removeStyle(menuToggle, 'margin-right');
         this.renderer.removeStyle(menuToggle, 'font-size');
       }
+    }
+  }
+
+  private updateMenuIconColor() {
+    const menuIcon = this.el.nativeElement.querySelector('.menu-icon');
+    if (menuIcon) {
+      let textColor = this.themeService.isDarkMode() ? 'white' : 'var(--text-color)';
+      if (!this.themeService.isDarkMode()) {
+        const scrollPosition = window.scrollY;
+        textColor = scrollPosition > 50 ? 'var(--text-color)' : 'white';
+      }
+      if (this.isMenuOpen) {
+        textColor = 'white';
+      }
+      this.renderer.setStyle(menuIcon, 'color', textColor);
     }
   }
 }
