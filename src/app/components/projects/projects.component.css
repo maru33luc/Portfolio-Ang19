@@ -130,7 +130,7 @@ h3 {
 
 @media (max-width: 480px) {
   .projects-section {
-    padding: 2.5rem 1.25rem;
+    /* padding: 2.5rem 1.25rem; */
   }
 
   .project-image {

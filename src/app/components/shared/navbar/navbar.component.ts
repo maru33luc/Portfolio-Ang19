@@ -8,7 +8,7 @@ import { ThemeService } from '../../../services/theme.service';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   template: `
-     <nav class="navbar">
+    <nav class="navbar">
       <div class="nav-container">
         <a routerLink="/" class="logo">
           <img src="../../../../assets/img/mari.png" alt="Logo">
@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private scrollListener: (() => void) | undefined;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {
@@ -43,6 +44,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     } else {
       this.renderer.removeStyle(document.body, 'overflow');
     }
+    this.updateMenuColors();
+    this.adjustMenuIconPosition();
   }
 
   closeMenu() {
@@ -50,6 +53,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isMenuOpen = false;
       this.renderer.removeStyle(document.body, 'overflow');
     }
+    this.updateMenuColors();
+    this.adjustMenuIconPosition();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -72,63 +77,80 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   private initializeNavbarEffects() {
+    this.updateMenuColors();
+    this.setupScrollListener();
+    this.adjustMenuIconPosition();
+  }
+
+  private setupScrollListener() {
     const navbar = this.el.nativeElement.querySelector('.navbar');
     const navLinks = this.el.nativeElement.querySelectorAll('.nav-links a');
     const themeToggle = this.el.nativeElement.querySelector('.theme-toggle');
-
-    navLinks.forEach((link: HTMLElement) => {
-      this.renderer.setStyle(link, 'color', 'white');
-    });
-
-    if (themeToggle) {
-      this.renderer.setStyle(themeToggle, 'color', 'white');
-    }
+    const menuIcon = this.el.nativeElement.querySelector('.menu-icon');
 
     this.scrollListener = () => {
       const scrollPosition = window.scrollY;
-      const maxScroll = 300;
-      const opacity = Math.min(scrollPosition / maxScroll, 1);
+      const maxScroll = 50;
 
       if (this.themeService.isDarkMode()) {
         this.renderer.setStyle(navbar, 'background-color', 'var(--navbar-background)');
-        return;
+      } else {
+        this.renderer.setStyle(navbar, 'background-color', `rgba(255, 255, 255, ${Math.min(0.2 + scrollPosition / maxScroll, 1)})`);
       }
 
-      this.renderer.setStyle(navbar, 'background-color', `rgba(255, 255, 255, ${0.2 + 0.8 * opacity})`);
+      const textColor = scrollPosition > 50 ? 'var(--text-color)' : 'white';
+      const afterColor = scrollPosition > 50 ? 'after-color' : '';
 
-      if (scrollPosition > 50) {
-        navLinks.forEach((link: HTMLElement) => {
-          this.renderer.setStyle(link, 'color', 'var(--text-color)');
-        });
-        if (themeToggle) {
-          this.renderer.setStyle(themeToggle, 'color', 'var(--text-color)');
+      navLinks.forEach((link: HTMLElement) => {
+        this.renderer.setStyle(link, 'color', textColor);
+        if (afterColor) {
+          this.renderer.addClass(link, afterColor);
+        } else {
+          this.renderer.removeClass(link, 'after-color');
         }
-      } else {
-        navLinks.forEach((link: HTMLElement) => {
-          this.renderer.setStyle(link, 'color', 'white');
-        });
-        if (themeToggle) {
-          this.renderer.setStyle(themeToggle, 'color', 'white');
-        }
+      });
+
+      this.renderer.setStyle(menuIcon, 'color', textColor);
+      
+      if (themeToggle) {
+        this.renderer.setStyle(themeToggle, 'color', textColor);
       }
     };
 
     window.addEventListener('scroll', this.scrollListener);
+  }
+
+  private updateMenuColors() {
+    const navLinks = this.el.nativeElement.querySelectorAll('.nav-links a');
+    const themeToggle = this.el.nativeElement.querySelector('.theme-toggle');
+    const menuIcon = this.el.nativeElement.querySelector('.menu-icon');
+
+    let textColor = this.themeService.isDarkMode() ? 'white' : 'var(--text-color)';
+
+    if (!this.themeService.isDarkMode() && this.isMenuOpen) {
+      textColor = 'white';
+      this.renderer.setStyle(menuIcon, 'color', 'white');
+    }
+
+    navLinks.forEach((link: HTMLElement) => {
+      this.renderer.setStyle(link, 'color', textColor);
+    });
 
     if (themeToggle) {
-      this.renderer.listen(themeToggle, 'mouseover', () => {
-        if (themeToggle.style.color === 'white') {
-          this.renderer.setStyle(themeToggle, 'color', 'black');
-        }
-      });
+      this.renderer.setStyle(themeToggle, 'color', textColor);
+    }
+  }
 
-      this.renderer.listen(themeToggle, 'mouseout', () => {
-        if (window.scrollY <= 50) {
-          this.renderer.setStyle(themeToggle, 'color', 'white');
-        } else {
-          this.renderer.setStyle(themeToggle, 'color', 'var(--text-color)');
-        }
-      });
+  private adjustMenuIconPosition() {
+    const menuToggle = this.el.nativeElement.querySelector('.menu-toggle');
+    if (menuToggle) {
+      if (this.isMenuOpen) {
+        this.renderer.setStyle(menuToggle, 'margin-right', '10px'); 
+        this.renderer.setStyle(menuToggle, 'font-size', '2.8rem');
+      } else {
+        this.renderer.removeStyle(menuToggle, 'margin-right');
+        this.renderer.removeStyle(menuToggle, 'font-size');
+      }
     }
   }
 }

@@ -3,18 +3,11 @@
 
   <div class="about-content">
     <div class="profile-section">
-      <img
-        src="assets/img/mari.png"
-        alt="Profile picture"
-        class="profile-image"
-      />
+      <img src="assets/img/mari.png" alt="Profile picture" class="profile-image" />
       <div class="bio">
         <h2 id="bio-title">Full Stack Developer</h2>
         <p>
-          Estudiante de Ingeniería en Sistemas de Información en la UTN FRMDP,
-          con pasión por el desarrollo web y la tecnología. Me especializo en el
-          desarrollo de aplicaciones web modernas y funcionales, con un enfoque
-          en la experiencia del usuario.
+          I am a passionate Full Stack developer, dedicated to creating innovative and efficient web solutions, where I transform complex challenges into high-impact projects. My focus is on integrating emerging technologies and continuous learning, exploring areas such as cybersecurity, data science, and Linux server administration, to deliver comprehensive and cutting-edge solutions.
         </p>
       </div>
     </div>
@@ -24,16 +17,10 @@
         <button [class.active]="showAll()" (click)="filterItems('all')">
           All
         </button>
-        <button
-          [class.active]="showExperience()"
-          (click)="filterItems('experience')"
-        >
+        <button [class.active]="showExperience()" (click)="filterItems('experience')">
           Experience
         </button>
-        <button
-          [class.active]="showEducation()"
-          (click)="filterItems('education')"
-        >
+        <button [class.active]="showEducation()" (click)="filterItems('education')">
           Education
         </button>
       </div>
@@ -53,7 +40,14 @@
               </div>
 
               <div class="timeline-content">
-                 <div class="timeline-date"> {{ item.period | elapsedTime }}</div>
+                <div class="timeline-date">
+                  <ng-container *ngIf="item.period.includes('Present'); else regularPeriod">
+                    {{ item.period | elapsedTime }}
+                  </ng-container>
+                  <ng-template #regularPeriod>
+                    {{ item.period }}
+                  </ng-template>
+                </div>
                 <div class="timeline-header">
                   <span
                     class="badge"

@@ -12,7 +12,7 @@ import ScrollReveal from 'scrollreveal';
       <div class="container">
         <div class="hero-content glass-effect">
           <h1>Welcome to my Portfolio</h1>
-          <p class="subtitle">Full Stack Developer & UI/UX Enthusiast</p>
+          <p class="subtitle">Full Stack Developer & SAP Application Developer</p>
           <div class="cta-buttons">
             <a routerLink="/projects" class="btn primary">View Projects</a>
             <a routerLink="/contact" class="btn secondary">Contact Me</a>
@@ -38,12 +38,12 @@ export class HomeComponent {
   skills = [
     {
       name: 'Frontend Development',
-      description: 'Angular, React, Vue.js, and modern CSS',
+      description: 'HTML, CSS, JavaScript, TypeScript and Angular',
       icon: 'fa fa-code',
     },
     {
       name: 'Backend Development',
-      description: 'Node.js, Python, and databases',
+      description: 'Node.js, Python, Django, Java, JavaFx, MySQL, and PostgreSQL',
       icon: 'fa fa-server',
     },
     {
@@ -53,7 +53,7 @@ export class HomeComponent {
     },
     {
       name: 'DevOps',
-      description: 'Docker, CI/CD, and cloud platforms',
+      description: 'Docker, CI/CD, Git & GitHub and cloud platforms',
       icon: 'fa fa-cloud',
     },
   ];

@@ -147,8 +147,9 @@ h2 {
 
 @media (max-width: 768px) {
   .hero{
-    margin-bottom: 0;
-    padding: 10px;
+    margin-top: 3rem;
+    /* margin-bottom: 0; */
+    /* padding: 2rem 0; */
   }
 
   .skills {
