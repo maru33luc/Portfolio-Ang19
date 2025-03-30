@@ -47,9 +47,9 @@ export class HomeComponent {
       icon: 'fa fa-server',
     },
     {
-      name: 'UI/UX Design',
-      description: 'Figma, Adobe XD, and user research',
-      icon: 'fa fa-paint-brush',
+      name: 'Linux, Redes y Ciberseguridad',
+      description: 'Administración Linux, seguridad de redes, hacking ético, scripting, virtualización y cloud.',
+      icon: 'fa fa-terminal',
     },
     {
       name: 'DevOps',
