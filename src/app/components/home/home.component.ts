@@ -47,8 +47,8 @@ export class HomeComponent {
       icon: 'fa fa-server',
     },
     {
-      name: 'Linux, Redes y Ciberseguridad',
-      description: 'Administración Linux, seguridad de redes, hacking ético, scripting, virtualización y cloud.',
+      name: 'Linux, Networking & Cybersecurity',
+      description: 'Linux administration, network security, ethical hacking, scripting, virtualization and cloud.',
       icon: 'fa fa-terminal',
     },
     {
