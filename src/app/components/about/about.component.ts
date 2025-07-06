@@ -52,19 +52,11 @@ export class AboutComponent {
         institution: "Universidad Tecnológica Nacional"
     },
     {
-        period: "March 2025 - Present",
-        description: "Comprehensive training in data science, covering from mathematical and logical foundations to the implementation of machine and deep learning models. Development of skills in programming, data management, and visualization for analysis and knowledge extraction.",
-        location: "Argentina",
-        type: "education",
-        degree: "University Technician in Data Science",
-        institution: "Universidad Nacional de Mar del Plata"
-    },
-    {
         period: 'May 2024 - Present · 9 months',
         description: 'Configuration and optimization of workflows within SAP for internal clients, aimed at improving operational efficiency and ensuring that financial processes align with business requirements. Management of configurations, incident resolution, and support for continuous improvement of systems in the FI (Finance) module, with a particular focus on Record to Report (RTR) and Treasury and Risk Management (TRM) areas.',
         location: 'Mar del Plata, Buenos Aires Province, Argentina · Remote',
         type: 'experience',
-        role: 'Packaged App Development Associate SAP',
+        role: 'SAP Packaged App Development Analyst',
         company: 'Accenture'
     },
     {
@@ -77,10 +69,10 @@ export class AboutComponent {
     },
     {
         period: 'Feb. 2022 - Nov. 2023 · 1 year 10 months',
-        description: 'Graduated with a degree in Technological Programming, focusing on web development technologies such as C, Java, HTML, CSS, JavaScript, Angular, NodeJS, Firebase, etc. I also gained experience with database management (MySQL, PostgreSQL, Sequelize) and project management tools like Jira and Trello.',
+        description: 'Graduated with a Associate Degree in Programming, focusing on web development technologies such as C, Java, HTML, CSS, JavaScript, Angular, NodeJS, Firebase, etc. I also gained experience with database management (MySQL, PostgreSQL, Sequelize) and project management tools like Jira and Trello.',
         location: 'Argentina',
         type: 'education',
-        degree: 'University Technician in Programming, Information Technology',
+        degree: 'Associate Degree in Programming, Information Technology',
         institution: 'Universidad Tecnológica Nacional'
     },
     {
