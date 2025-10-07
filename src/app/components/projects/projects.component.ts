@@ -63,9 +63,9 @@ export class ProjectsComponent {
     },
     {
       title: 'Kitesurf School - Booking System',
-      description: 'Full-stack system built with Angular, Node.js, and PostgreSQL to manage bookings, classes, and instructors for a kitesurf school, featuring an admin dashboard and Docker deployment.',
+      description: 'Full-stack system to manage classes, and instructors for a kitesurf school, featuring an admin dashboard.',
       image: '../../../assets/img/projects/KitesurfSchool.png',
-      technologies: ['Angular 20', 'Node.js', 'Express', 'PostgreSQL', 'Docker', 'Angular Material'],
+      technologies: ['Angular 20', 'Node.js', 'PostgreSQL', 'JWT Auth'],
       liveUrl: 'https://kitesurf-app.vercel.app/landing',
       githubUrl: 'https://github.com/maru33luc/kitesurf-app'
     },
