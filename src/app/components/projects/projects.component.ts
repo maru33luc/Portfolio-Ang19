@@ -71,7 +71,7 @@ export class ProjectsComponent {
     },
     {
       title: 'Task Manager - Full Stack App',
-      description: 'Full-stack task manager with Angular 18 frontend and NestJS backend, featuring JWT authentication and role-based access control.',
+      description: 'Full-stack task manager with Angular 18 frontend and NestJS backend, featuring JWT Auth and role-based access control.',
       image: '../../../assets/img/projects/Safe Task Manager.png',
       technologies: ['Angular', 'NestJS', 'PostgreSQL', 'JWT Auth'],
       liveUrl: 'https://task-manager-zeta-six-44.vercel.app',
