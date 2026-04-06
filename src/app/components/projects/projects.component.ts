@@ -70,12 +70,12 @@ export class ProjectsComponent {
       githubUrl: 'https://github.com/maru33luc/kitesurf-app'
     },
     {
-      title: 'AppNotes - Note Taking App',
-      description: 'A collaborative task management application with real-time updates and team collaboration features.',
-      image: '../../../assets/img/projects/AppNotes.png',
-      technologies: ['React', 'Firebase', 'Material-UI', 'Redux'],
-      liveUrl: 'https://app-notes-challenge-cli.vercel.app/notes-list',
-      githubUrl: 'https://github.com/maru33luc/App-Notes-Challenge.git'
+      title: 'Task Manager - Full Stack App',
+      description: 'Full-stack task manager with Angular 18 frontend and NestJS backend, featuring JWT authentication and role-based access control.',
+      image: '../../../assets/img/projects/Safe Task Manager.png',
+      technologies: ['Angular', 'NestJS', 'PostgreSQL', 'JWT Auth'],
+      liveUrl: 'https://task-manager-zeta-six-44.vercel.app',
+      githubUrl: 'https://github.com/maru33luc/task-manager'
     }
   ];
   
