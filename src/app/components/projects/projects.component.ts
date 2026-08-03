@@ -70,12 +70,12 @@ export class ProjectsComponent {
       githubUrl: 'https://github.com/maru33luc/kitesurf-app'
     },
     {
-      title: 'Task Manager - Full Stack App',
-      description: 'Full-stack task manager with Angular 18 frontend and NestJS backend, featuring JWT Auth and role-based access control.',
-      image: '../../../assets/img/projects/Safe Task Manager.png',
-      technologies: ['Angular', 'NestJS', 'PostgreSQL', 'JWT Auth'],
-      liveUrl: 'https://task-manager-zeta-six-44.vercel.app',
-      githubUrl: 'https://github.com/maru33luc/task-manager'
+      title: 'RAG Neon NVIDIA Demo - Semantic Search & QA',
+      description: 'RAG demo: Angular 19 frontend, Neon (pgvector) backend, NVIDIA NIM embeddings & QA — deployed on Vercel.',
+      image: '../../../assets/img/RAG Neon NVIDIA Demo.png',
+      technologies: ['Angular 19', 'TypeScript', 'Neon (serverless Postgres)', 'pgvector', 'NVIDIA NIM', 'Embeddings & Vector Search', 'Retrieval-Augmented Generation (RAG)', 'Vercel (deployment)', 'Document ingestion'],
+      liveUrl: 'https://rag-nvidia-demo.vercel.app/',
+      githubUrl: 'https://github.com/maru33luc/rag-neon-nvidia-demo'
     }
   ];
   
