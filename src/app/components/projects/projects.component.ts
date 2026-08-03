@@ -72,8 +72,8 @@ export class ProjectsComponent {
     {
       title: 'RAG Neon NVIDIA Demo - Semantic Search & QA',
       description: 'RAG demo: Angular 19 frontend, Neon (pgvector) backend, NVIDIA NIM embeddings & QA — deployed on Vercel.',
-      image: '../../../assets/img/RAG Neon NVIDIA Demo.png',
-      technologies: ['Angular 19', 'TypeScript', 'Neon (serverless Postgres)', 'pgvector', 'NVIDIA NIM', 'Embeddings & Vector Search', 'Retrieval-Augmented Generation (RAG)', 'Vercel (deployment)', 'Document ingestion'],
+      image: '../../../assets/img/projects/RAG-Neon-NVIDIA-Demo.png',
+      technologies: ['Angular 19', 'Neon (serverless Postgres)', 'pgvector', 'NVIDIA NIM', 'Embeddings & Vector Search', 'Retrieval-Augmented Generation (RAG)'],
       liveUrl: 'https://rag-nvidia-demo.vercel.app/',
       githubUrl: 'https://github.com/maru33luc/rag-neon-nvidia-demo'
     }
