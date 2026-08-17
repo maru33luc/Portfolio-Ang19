@@ -64,6 +64,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
       import('scrollreveal').then((ScrollReveal) => {
         const sr = ScrollReveal.default;
         sr().reveal('.skills', {

@@ -1,7 +1,8 @@
-import { Component, inject, HostListener, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject, HostListener, OnInit, OnDestroy, ElementRef, Renderer2, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { ThemeService } from '../../../services/theme.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +11,14 @@ import { ThemeService } from '../../../services/theme.service';
   template: `
     <nav class="navbar">
       <div class="nav-container">
-        <a routerLink="/" class="logo">
+        <a routerLink="/" class="logo" (click)="scrollToTop()">
           <img src="../../../../assets/img/mari.png" alt="Logo">
         </a>
         <button class="menu-toggle" (click)="toggleMenu()">
           <span class="menu-icon">{{ menuIconContent }}</span>
         </button>
         <div class="nav-links" [class.active]="isMenuOpen">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu(); scrollToTop()">Home</a>
           <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
           <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()">Projects</a>
           <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
@@ -32,11 +33,19 @@ import { ThemeService } from '../../../services/theme.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   themeService = inject(ThemeService);
+  private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
   isMenuOpen = false;
   menuIconContent = '☰';
   private scrollListener: (() => void) | undefined;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  scrollToTop() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

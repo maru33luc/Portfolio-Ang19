@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -276,7 +277,18 @@ export class ContactComponent {
       this.submitStatus = null;
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const { default: emailjs } = await import('@emailjs/browser');
+        await emailjs.send(
+          environment.emailjs.serviceId,
+          environment.emailjs.templateId,
+          {
+            from_name: this.contactForm.value.name,
+            from_email: this.contactForm.value.email,
+            message: this.contactForm.value.message,
+            to_email: environment.emailjs.toEmail,
+          },
+          environment.emailjs.publicKey
+        );
         this.submitStatus = 'success';
         this.contactForm.reset();
       } catch (error) {
