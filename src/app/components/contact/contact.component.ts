@@ -172,7 +172,7 @@ import {
         padding: 0.75rem;
         border: 2px solid var(--border-color);
         border-radius: 0.5rem;
-        background: var(--background-color);
+        background: var(--input-background, var(--background-color));
         color: var(--text-color);
         transition: border-color 0.3s;
         box-sizing: border-box;
@@ -276,6 +276,9 @@ export class ContactComponent {
       this.submitStatus = null;
 
       try {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        this.submitStatus = 'success';
+        this.contactForm.reset();
       } catch (error) {
         this.submitStatus = 'error';
       } finally {

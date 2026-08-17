@@ -1,7 +1,6 @@
 import { Component, Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import ScrollReveal from 'scrollreveal';
 
 @Component({
   selector: 'app-home',

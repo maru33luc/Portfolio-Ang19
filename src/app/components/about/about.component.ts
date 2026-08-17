@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import ScrollReveal from 'scrollreveal';
 import { isPlatformBrowser } from '@angular/common';
 import { ElapsedTimePipe } from '../shared/pipes/elapsed-time.pipe';
 
@@ -44,15 +43,15 @@ export class AboutComponent {
 
   items: TimelineItem[] = [
     {
-        period: "March 2025 - Present",
-        description: "Training in Linux server administration and security, focusing on implementing robust security policies, protecting critical data, identifying potential threats, and maintaining system stability in business environments. Development of customized security solutions.",
+        period: "March 2025 - December 2025",
+        description: "Advanced training in Linux server administration and security, focusing on implementing robust security policies, protecting critical data, identifying potential threats, and maintaining system stability in business environments. Development of customized security solutions.",
         location: "Argentina",
         type: "education",
         degree: "Linux Network Administrator with Specialization in Cybersecurity and Ethical Hacking",
         institution: "Universidad Tecnológica Nacional"
     },
     {
-        period: 'May 2024 - Present · 9 months',
+        period: 'May 2024 - Present',
         description: 'Configuration and optimization of workflows within SAP for internal clients, aimed at improving operational efficiency and ensuring that financial processes align with business requirements. Management of configurations, incident resolution, and support for continuous improvement of systems in the FI (Finance) module, with a particular focus on Record to Report (RTR) and Treasury and Risk Management (TRM) areas.',
         location: 'Mar del Plata, Buenos Aires Province, Argentina · Remote',
         type: 'experience',
@@ -181,32 +180,37 @@ export class AboutComponent {
     }
   }
 
-  ngAfterViewInit() {
+  private srInstance: any = null;
 
+  ngAfterViewInit() {
     this.animationItems();
   }
 
   animationItems() {
     if (isPlatformBrowser(this.platformId)) {
       import('scrollreveal').then((ScrollReveal) => {
-        const sr = ScrollReveal.default;
 
-        sr().reveal('.timeline-item', {
-          duration: 1000,
+        // Destruir la instancia anterior para limpiar todo el estado interno
+        if (this.srInstance) {
+          this.srInstance.destroy();
+          this.srInstance = null;
+        }
+
+        // Crear una nueva instancia limpia
+        this.srInstance = ScrollReveal.default();
+
+        this.srInstance.reveal('.timeline-item', {
+          duration: 800,
           origin: 'bottom',
-          distance: '50px',
-          delay: 200,
+          distance: '40px',
+          delay: 100,
           reset: false,
-          viewFactor: 0.6,
+          viewFactor: 0.1,
           easing: 'ease-in-out',
-          scale: 0.8,
-          afterReveal: function (el) {
-            console.log(`Revealed: ${el}`);
-          },
+          scale: 0.9,
         });
       });
     }
-
   }
 
   filterItems(type: 'all' | 'experience' | 'education') {
@@ -222,7 +226,6 @@ export class AboutComponent {
         this.showAll.set(false);
         this.showExperience.set(true);
         this.showEducation.set(false);
-
         break;
       case 'education':
         this.itemsSignal.set(this.items.filter((item) => item.type === 'education'));
@@ -231,7 +234,8 @@ export class AboutComponent {
         this.showEducation.set(true);
         break;
     }
-    this.animationItems();
+    // Esperar a que Angular renderice los nuevos items en el DOM
+    setTimeout(() => this.animationItems(), 100);
   }
 
 }
