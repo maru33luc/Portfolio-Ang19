@@ -37,54 +37,56 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 })
 export class ProjectsComponent {
   projects = [
-    {
-      title: 'TechStore - E-Commerce Platform',
-      description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
+        {
+      title: 'EcommerceTech - Electronics Store',
+     description: 'Angular 17 e-commerce with role-based auth, real-time search & filters, MercadoPago checkout, Cloudinary uploads, admin dashboard and GSAP animations.',
       image: '../../../assets/img/projects/TechStore.png',
-      technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
+      technologies: ['Angular 17', 'TypeScript', 'TailwindCSS', 'RxJS', 'GSAP', 'Cloudinary', 'MercadoPago'],
       liveUrl: 'https://angular-ecommerce-electronics.vercel.app/',
       githubUrl: 'https://github.com/maru33luc/Angular-Ecommerce-electronics.git'
-    },
-    {
-      title: 'FunkoStore E-Commerce Platform',
-      description: 'A full-featured e-commerce platform with real-time inventory management and secure payment processing.',
+    }
+,
+   {
+      title: 'FunkoStore E-Commerce',
+      description: 'Full-stack Funko Pop store with JWT auth, admin dashboard, persistent cart in PostgreSQL, offline cart via IndexedDB, and character data from 4 external APIs.',
       image: '../../../assets/img/projects/FunkoStore.png',
-      technologies: ['Angular', 'Node.js', 'MongoDB', 'Stripe'],
+      technologies: ['Angular', 'Node.js', 'PostgreSQL', 'Sequelize', 'TypeScript', 'JWT'],
       liveUrl: 'https://funko-store-seven.vercel.app/home',
       githubUrl: 'https://github.com/maru33luc/FunkoStore-Postgres-2025.git'
-    },
+},
+
     {
-      title: 'MuniApp - Municipal Services App',
-      description: 'A weather dashboard that provides real-time weather information and forecasts using multiple APIs.',
+      title: 'MuniApp - Ciudad de Dolores',
+      description: 'Official digital portal for the Municipality of Dolores that lets citizens access municipal services, read local news, and carry a QR-powered digital ID card.',
       image: '../../../assets/img/projects/MuniApp.png',
-      technologies: ['Vue.js', 'OpenWeather API', 'Chart.js'],
+      technologies: ['Angular 18', 'TypeScript', 'Bootstrap', 'GSAP', 'JWT', 'PWA', 'SSR'],
       liveUrl: 'https://pruebapwapush.vercel.app/home',
       githubUrl: 'https://github.com/maru33luc/Muni-App-Client.git'
-    },
-    {
-      title: 'Kitesurf School - Booking System',
-      description: 'Full-stack system to manage classes, and instructors for a kitesurf school, featuring an admin dashboard.',
+},
+   {
+      title: 'KiteSurf School - Booking System',
+      description: 'Full-stack booking platform for a kitesurf school that lets students browse sessions, reserve classes, and manage bookings through a role-based dashboard with real-time availability.',
       image: '../../../assets/img/projects/KitesurfSchool.png',
-      technologies: ['Angular 20', 'Node.js', 'PostgreSQL', 'JWT Auth'],
+      technologies: ['Angular 20', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'JWT', 'SSR'],
       liveUrl: 'https://kitesurf-app.vercel.app/landing',
       githubUrl: 'https://github.com/maru33luc/kitesurf-app'
-    },
+},
     {
-      title: 'RAG Neon NVIDIA - Semantic Search & QA',
-      description: 'RAG demo: Angular 19 frontend, Neon (pgvector) backend, NVIDIA NIM embeddings & QA — deployed on Vercel.',
+      title: 'RAG Neon NVIDIA - Semantic Search & Q&A',
+      description: 'Full-stack RAG application that lets users ingest documents, ask questions in natural language, and get grounded answers via NVIDIA NIM embeddings and Neon pgvector similarity search.',
       image: '../../../assets/img/projects/RAG-Neon-NVIDIA-Demo.png',
-      technologies: ['Neon', 'NVIDIA NIM', 'Embeddings & Vector Search'],
+      technologies: ['Angular 19', 'TypeScript', 'Neon pgvector', 'NVIDIA NIM', 'Vercel', 'Node.js'],
       liveUrl: 'https://rag-nvidia-demo.vercel.app/',
       githubUrl: 'https://github.com/maru33luc/rag-neon-nvidia-demo'
-    },
-    {
-       title: 'Task Manager with Applied Security',
-       description: 'Task Manager: Angular 18, NestJS, JWT auth, rate limiting, CSP, Helmet, and supply chain protection.',
-       image: '../../../assets/img/projects/Safe Task Manager.png',
-       technologies: ['NestJS', 'TypeORM', 'JWT', 'Playwright'],
-       liveUrl: 'https://task-manager-zeta-six-44.vercel.app/auth/login',
-       githubUrl: 'https://github.com/maru33luc/task-manager'
-    }
+},
+   {
+      title: 'Task Manager with Applied Security',
+      description: 'Full-stack task manager with Angular 18 and NestJS, featuring JWT auth with refresh tokens, bcrypt hashing, rate limiting, Helmet CSP, and supply chain protection via exact versions and ignore-scripts.',
+      image: '../../../assets/img/projects/Safe Task Manager.png',
+      technologies: ['Angular 18', 'NestJS', 'TypeORM', 'JWT', 'Playwright', 'TailwindCSS'],
+      liveUrl: 'https://task-manager-zeta-six-44.vercel.app/auth/login',
+      githubUrl: 'https://github.com/maru33luc/task-manager'
+}
   ];
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
