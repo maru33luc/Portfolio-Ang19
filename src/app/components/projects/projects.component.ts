@@ -117,7 +117,7 @@ export class ProjectsComponent {
         'PWA',
         'SSR',
       ],
-      liveUrl: 'https://pruebapwapush.vercel.app/home',
+      liveUrl: 'https://muni-app-client.vercel.app/home',
       githubUrl: 'https://github.com/maru33luc/Muni-App-Client.git',
     },
     {
